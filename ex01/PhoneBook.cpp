@@ -69,7 +69,10 @@ void    PhoneBook::searchContact()
         return ;
     }
     if (emptyField == 1)
+    {
         std::cout << "Saved contacts cannot have empty fields" << std::endl;
+        emptyField = 0;
+    }
     std::cout << std::right << std::setw(10) << "index" << "|"
             << std::right << std::setw(10) << "first name" << "|"
             << std::right << std::setw(10) << "last name" << "|"
@@ -107,18 +110,16 @@ void    PhoneBook::searchContact()
     nickname = contacts[index].displayNick();
     phonenumber = contacts[index].displayPhone();
     secret = contacts[index].displaySecret();
-    std::cout << std::right << std::setw(10) << "index" << "|"
-            << std::right << std::setw(10) << "first name" << "|"
-            << std::right << std::setw(10) << "last name" << "|"
-            << std::right << std::setw(10) << "nickname" << "|"
-            << std::right << std::setw(10) << "phone number" << "|"
-            << std::right << std::setw(10) << "darkest secret"
-            << std::endl;
-    std::cout << std::right << std::setw(10) << index << "|"
-            << std::right << std::setw(10) << formatColumn(first) << "|"
-            << std::right << std::setw(10) << formatColumn(last) << "|"
-            << std::right << std::setw(10) << formatColumn(nickname) << "|"
-            << std::right << std::setw(10) << formatColumn(phonenumber) << "|"
-            << std::right << std::setw(10) << formatColumn(secret)
+    std::cout << index
+            << std::endl
+            << first
+            << std::endl
+            << last
+            << std::endl
+            << nickname
+            << std::endl
+            << phonenumber
+            << std::endl
+            << secret
             << std::endl;
 }
