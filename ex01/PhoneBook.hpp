@@ -14,7 +14,6 @@ class PhoneBook
         PhoneBook();
         void    addContact();
         void    searchContact();
-        int     checkEmptyField();
 };
 
 #endif

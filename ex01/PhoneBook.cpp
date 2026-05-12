@@ -69,10 +69,7 @@ void    PhoneBook::searchContact()
         return ;
     }
     if (emptyField == 1)
-    {
         std::cout << "Saved contacts cannot have empty fields" << std::endl;
-        return ; 
-    }
     std::cout << std::right << std::setw(10) << "index" << "|"
             << std::right << std::setw(10) << "first name" << "|"
             << std::right << std::setw(10) << "last name" << "|"
