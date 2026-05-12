@@ -1,16 +1,18 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
-NAME = megaphone
-SRC = megaphone.cpp
-OBJECT = megaphone.o
+NAME = phonebook
+SRC = main.cpp PhoneBook.cpp \
+		Contact.cpp
+OBJECT = main.o PhoneBook.o \
+		Contact.o
 
 all: $(NAME)
 
 $(NAME): $(OBJECT)
 	$(CC) $(FLAGS) $(OBJECT) -o $(NAME)
 
-$(OBJECT) : $(SRC)
-	$(CC) $(FLAGS) -c $(SRC) -o $(OBJECT)
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECT)
