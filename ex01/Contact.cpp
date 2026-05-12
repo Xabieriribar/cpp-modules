@@ -1,6 +1,5 @@
 #include <string>
 #include "Contact.hpp"
-#include "PhoneBook.hpp"
 
 void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string darkest)
 {

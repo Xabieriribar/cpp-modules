@@ -36,7 +36,7 @@ void    PhoneBook::addContact()
         return;
     if (first == ""|| last == ""|| nickname == "" || phonenumber == "" || darkest == "")
     {
-        emptyField = 1;
+        std::cout << "Saved contacts cannot have empty fields" << std::endl;
         return ;
     }
     contacts[nextIndex].setContact(first, last, nickname, phonenumber, darkest);
@@ -67,11 +67,6 @@ void    PhoneBook::searchContact()
     {
         std::cout << "PhoneBook is empty" << std::endl;
         return ;
-    }
-    if (emptyField == 1)
-    {
-        std::cout << "Saved contacts cannot have empty fields" << std::endl;
-        emptyField = 0;
     }
     std::cout << std::right << std::setw(10) << "index" << "|"
             << std::right << std::setw(10) << "first name" << "|"
