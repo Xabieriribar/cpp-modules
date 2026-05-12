@@ -9,10 +9,12 @@ class PhoneBook
         Contact contacts[8]; 
         int     contactCount;
         int     nextIndex;
+        int     emptyField;
     public:
         PhoneBook();
         void    addContact();
         void    searchContact();
+        int     checkEmptyField();
 };
 
 #endif

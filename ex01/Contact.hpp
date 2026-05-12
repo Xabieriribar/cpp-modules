@@ -16,6 +16,7 @@ class Contact
         std::string displaySecond();
         std::string displayNick();
         std::string displayPhone();
+        std::string displaySecret();
 };
 
 #endif
