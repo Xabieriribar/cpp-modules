@@ -6,12 +6,8 @@
 int main ()
 {
     std::string input;
-    int         empty_flag;
-    int         emptyField;
     PhoneBook pb;
     
-    empty_flag = 1;
-    emptyField = 0;
     while (1)
     {
         std::cout << "Enter command: ";
@@ -20,21 +16,9 @@ int main ()
         if (input == "ADD")
         {
             pb.addContact();
-            emptyField = pb.checkEmptyField();
-            empty_flag = 0;
         }
-        else if (input == "SEARCH" && emptyField == 0)
-        {
-            if (empty_flag == 0)
-                pb.searchContact();
-            else
-                std::cout << "PhoneBook is empty" << std::endl;
-        }
-        else if (emptyField == 1)
-        {
-                std::cout << "Saved contacts cannot have empty fields" << std::endl;
-                emptyField = 0;
-        }
+        else if (input == "SEARCH")
+            pb.searchContact();
         else if (input == "EXIT")
             return 0;
     }

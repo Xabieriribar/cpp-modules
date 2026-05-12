@@ -5,16 +5,6 @@
 #include <string>
 #include <cctype>
 
-int     PhoneBook::checkEmptyField()
-{
-    if (emptyField)
-    {
-        emptyField = 0;
-        return 1;
-    }
-    return 0;
-}
-
 PhoneBook::PhoneBook()
 {
     nextIndex = 0;
@@ -49,7 +39,7 @@ void    PhoneBook::addContact()
         emptyField = 1;
         return ;
     }
-    contacts[nextIndex].setContact(first, last, nickname, phonenumber);
+    contacts[nextIndex].setContact(first, last, nickname, phonenumber, darkest);
     nextIndex++;
     if (nextIndex == 8)
         nextIndex = 0;
@@ -73,6 +63,16 @@ void    PhoneBook::searchContact()
     std::string secret;
     int index = 0;
 
+    if (contactCount == 0)
+    {
+        std::cout << "PhoneBook is empty" << std::endl;
+        return ;
+    }
+    if (emptyField == 1)
+    {
+        std::cout << "Saved contacts cannot have empty fields" << std::endl;
+        return ; 
+    }
     std::cout << std::right << std::setw(10) << "index" << "|"
             << std::right << std::setw(10) << "first name" << "|"
             << std::right << std::setw(10) << "last name" << "|"

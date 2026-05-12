@@ -2,12 +2,13 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
-void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone)
+void Contact::setContact(std::string first, std::string last, std::string nick, std::string phone, std::string darkest)
 {
     firstName = first;
     lastName = last;
     nickname = nick;
     phoneNumber = phone;
+    darkestSecret = darkest; 
 }
 
 std::string Contact::displayFirst()
