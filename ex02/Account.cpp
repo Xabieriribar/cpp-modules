@@ -94,6 +94,7 @@ void	Account::makeDeposit( int deposit )
     Account::_totalNbDeposits++;
     Account::_totalAmount += deposit;
     std::cout << "amount:" << _amount;
+    std::cout << ";";
     std::cout << "nb_deposits:" << _nbDeposits;
     std::cout << std::endl;
 }
