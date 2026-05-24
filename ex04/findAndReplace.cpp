@@ -1,6 +1,6 @@
 #include "sedIsForLosers.hpp"
 
-size_t findWord(std::string line, std::string toFind)
+void findWord(std::string line, std::string toFind, int indexAfterMatch, size_t &startPosition)
 {
-    return line.find()
+    startPosition = line.find(toFind, indexAfterMatch);
 }
