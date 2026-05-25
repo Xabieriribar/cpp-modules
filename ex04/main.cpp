@@ -2,49 +2,50 @@
 
 int main(int argc, char **argv)
 {
-    std::string  outFileName;
     std::string  line;
-    size_t       startPosition;
-    std::string  newLine;
-    int         s2_len;
-    int         indexAfterMatch;
 
     if (argc != 4)
     {
-        std::cout << "Usage: ./sedIsForLosers [Name of the input file] [Word to find] [Word to substitute it with]" << std::endl;
-        return (1);
+        std::cerr << "Usage: ./sedIsForLosers [Name of the input file] [Word to find] [Word to substitute it with]" << std::endl;
+        return (2);
+    }
+    if (std::string (argv[2]).empty())
+    {
+        std::cerr << "The search term is empty" << std::endl;
+        return (2);
     }
     std::ifstream inFile(argv[1]);
     if (!inFile)
     {
-        std::cout << "Infile error";
+        std::cerr << "Infile error" << std::endl;
         return (2);
     }
-    outFileName = std::string (argv[1]) + ".replace";
+    std::string outFileName = std::string (argv[1]) + ".replace";
     std::ofstream outFile(outFileName.c_str());
     if (!outFile)
     {
-        std::cout << "Outfile error";
+        std::cerr << "Outfile error" << std::endl;
         return (2);
     }
-    s2_len = std::string (argv[3]).length();
+    size_t s2_len = std::string (argv[3]).length();
+    std::string newLine;
     while (std::getline(inFile, line))
     {
-        startPosition = 0;
-        indexAfterMatch = 0;
+        size_t startPosition = 0;
+        size_t indexAfterMatch = 0;
         while (startPosition != std::string::npos)
         {
             findWord(line, argv[2], indexAfterMatch, startPosition);
             if (startPosition == std::string::npos)
+            {
+                newLine = line;
                 break;
+            }
             getNextLine(newLine, line, startPosition, argv);
             indexAfterMatch = startPosition + s2_len;
             line = newLine;
         }
-        if (!line.empty())
-            outFile << newLine << std::endl;
-        else
-            outFile << std::endl;
+        outFile << newLine << std::endl;
     }
     return 0;
 
