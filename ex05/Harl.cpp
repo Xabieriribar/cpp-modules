@@ -2,10 +2,6 @@
 
 Harl::Harl()
 {
-    levels[0] = "DEBUG";
-    levels[1] = "INFO";
-    levels[2] = "WARNING";
-    levels[3] = "ERROR";
     TestFlag = true;
     NumberOfLevels = 4;
 }
