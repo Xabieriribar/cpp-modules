@@ -47,8 +47,27 @@ void Harl::complain(std::string level)
     pointer_array[3] = &Harl::error;
     while (level != levels[Index] && Index != NumberOfLevels)
         Index++;
-    if (Index != NumberOfLevels)
-        (this->*pointer_array[Index])();
-    else
-        std::cout << "Harl does not accept this level. Please introduce a correct level" << std::endl;
+    switch (Index)
+    {
+        case 0:
+            std::cout << "[DEBUG]" << std::endl;
+            (this->*pointer_array[0])();
+            std::cout << std::endl;
+        case 1:
+            std::cout << "[INFO]" << std::endl;
+            (this->*pointer_array[1])();
+            std::cout << std::endl;
+        case 2:
+            std::cout << "[WARNING]" << std::endl;
+            (this->*pointer_array[2])();
+            std::cout << std::endl;
+        case 3:
+            std::cout << "[ERROR]" << std::endl;
+            (this->*pointer_array[3])();
+            std::cout << std::endl;
+        default:
+            break ;
+    }
+    if (Index == NumberOfLevels)
+        std::cout << "[Probably complaining around insignificant problems]" << std::endl;
 }

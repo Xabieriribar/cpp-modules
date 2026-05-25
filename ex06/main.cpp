@@ -1,21 +1,16 @@
 #include "Harl.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
     Harl harl;
     size_t Index = 0;
     size_t NumberOfLevels = 4;
-    std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-    while (Index < NumberOfLevels)
+    if (argc != 2)
     {
-        harl.complain(levels[Index]);
-        if (!harl.getFlag())
-            return (2);
-        Index++;
-    }
-    harl.complain("INVALID LEVEL");
-    if (!harl.getFlag())
+        std::cerr << "Introduce only one level" << std::endl;
         return (2);
+    }
+    harl.complain(argv[1]);
     return (0);
 }
