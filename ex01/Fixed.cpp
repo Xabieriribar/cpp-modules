@@ -10,7 +10,7 @@ Fixed::Fixed(const int value) : FixedPointNumber(value << Bits)
     std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float fvalue) : FixedPointNumber((roundf(fvalue * 256.0f)))
+Fixed::Fixed(const float fvalue) : FixedPointNumber((roundf(fvalue * (1 << Bits))))
 {
     std::cout << "Float constructor called" << std::endl;
 }
@@ -52,7 +52,7 @@ int Fixed::toInt(void) const
 
 float Fixed::toFloat(void) const
 {
-    return ((float)FixedPointNumber/256.0f);
+    return ((float)FixedPointNumber/(float)(1 <<Bits));
 }
 
 std::ostream &operator<<(std::ostream &o, Fixed const &i)
