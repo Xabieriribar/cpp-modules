@@ -8,7 +8,7 @@ class Fixed
 {
     private:
         int FixedPointNumber;
-        static const int Bits;
+        static const int Bits = 8;
     public:
         Fixed();
         Fixed(const int value);
@@ -21,4 +21,7 @@ class Fixed
         float toFloat(void) const;
         int toInt(void) const;
 };
+
+std::ostream &operator<<(std::ostream &o, Fixed const &i);
+
 #endif
