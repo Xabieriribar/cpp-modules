@@ -109,34 +109,76 @@ bool Fixed::operator!=(const Fixed &other) const
         return (false);
 }
 
-int Fixed::min(Fixed &NumberOne, Fixed &NumberTwo)
+int  Fixed::operator*(const Fixed &other) const
+{
+    float x = this->toFloat();
+    float y = other.toFloat();
+    Fixed x_object(x);
+    Fixed y_object(x);
+    std::cout << "This is it: " << x << std::endl;
+    float result = x * y;
+
+    
+    return ();
+}
+
+int  Fixed::operator/(const Fixed &other) const
+{
+    return (this->FixedPointNumber / other.getRawBits());
+}
+
+int  Fixed::operator+(const Fixed &other) const
+{
+    return (this->FixedPointNumber + other.getRawBits());
+}
+
+int  Fixed::operator-(const Fixed &other) const
+{
+    return (this->FixedPointNumber - other.getRawBits());
+}
+
+
+Fixed &Fixed::operator++(void)
+{
+    this->FixedPointNumber += 1;
+    return (*this);
+}
+Fixed Fixed::operator++(int)
+{
+    Fixed copy(*this);
+
+    this->FixedPointNumber += 1;
+    return (copy);
+}
+
+Fixed &Fixed::min(Fixed &NumberOne, Fixed &NumberTwo)
 {
     if (NumberOne < NumberTwo)
-        return (NumberOne.getRawBits());
+        return (NumberOne);
     else
-        return (NumberTwo.getRawBits());
+        return (NumberTwo);
 }
 
-int Fixed::min(const Fixed &NumberOne, const Fixed &NumberTwo)
+Fixed const &Fixed::min(const Fixed &NumberOne, const Fixed &NumberTwo)
 {
     if (NumberOne < NumberTwo)
-        return (NumberOne.getRawBits());
+        return (NumberOne);
     else
-        return (NumberTwo.getRawBits());
+        return (NumberTwo);
 }
 
-int Fixed::max(Fixed &NumberOne, Fixed &NumberTwo)
+Fixed &Fixed::max(Fixed &NumberOne, Fixed &NumberTwo)
 {
     if (NumberTwo > NumberOne)
-        return ((NumberTwo.getRawBits() >> Bits));
+        return (NumberTwo);
     else
-        return (NumberOne.getRawBits() >> Bits);
+        return (NumberOne);
 }
 
-int Fixed::max(const Fixed &NumberOne, const Fixed &NumberTwo)
+Fixed const &Fixed::max(const Fixed &NumberOne, const Fixed &NumberTwo)
 {
     if (NumberTwo > NumberOne)
-        return (NumberTwo.getRawBits());
+        return (NumberTwo);
     else
-        return (NumberOne.getRawBits());
+        return (NumberOne);
 }
