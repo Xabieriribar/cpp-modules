@@ -109,32 +109,40 @@ bool Fixed::operator!=(const Fixed &other) const
         return (false);
 }
 
-int  Fixed::operator*(const Fixed &other) const
+Fixed Fixed::operator*(const Fixed &other) const
 {
     float x = this->toFloat();
     float y = other.toFloat();
-    Fixed x_object(x);
-    Fixed y_object(x);
-    std::cout << "This is it: " << x << std::endl;
     float result = x * y;
+    Fixed res(result);
 
-    
-    return ();
+    return (res);
 }
 
-int  Fixed::operator/(const Fixed &other) const
+Fixed Fixed::operator/(const Fixed &other) const
 {
-    return (this->FixedPointNumber / other.getRawBits());
+    float x = this->toFloat();
+    float y = other.toFloat();
+    float result = x / y;
+    Fixed res(result);
+
+    return (res);
 }
 
-int  Fixed::operator+(const Fixed &other) const
+Fixed Fixed::operator+(const Fixed &other) const
 {
-    return (this->FixedPointNumber + other.getRawBits());
+    Fixed result;
+
+    result.setRawBits(this->getRawBits() + other.getRawBits());
+    return (result);
 }
 
-int  Fixed::operator-(const Fixed &other) const
+Fixed Fixed::operator-(const Fixed &other) const
 {
-    return (this->FixedPointNumber - other.getRawBits());
+    Fixed result;
+
+    result.setRawBits(this->getRawBits() - other.getRawBits());
+    return (result);
 }
 
 

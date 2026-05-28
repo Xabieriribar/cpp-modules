@@ -26,10 +26,10 @@ class Fixed
         bool operator==(const Fixed &other) const;
         bool operator!=(const Fixed &other) const;
         
-        int  operator*(const Fixed &other) const;
-        int  operator/(const Fixed &other) const;
-        int  operator+(const Fixed &other) const;
-        int  operator-(const Fixed &other) const;
+        Fixed operator*(const Fixed &other) const;
+        Fixed operator/(const Fixed &other) const;
+        Fixed operator+(const Fixed &other) const;
+        Fixed operator-(const Fixed &other) const;
 
         int getRawBits(void) const;
         void setRawBits(int const raw);
