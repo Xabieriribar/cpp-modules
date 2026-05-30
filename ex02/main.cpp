@@ -1,22 +1,22 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main(void)
 {
-    ScavTrap d("Scabitrabi");
-    ScavTrap e("Xabi");
+    FragTrap d("Scabitrabi");
+    FragTrap e("Xabi");
     int     DefaultPoints = 100;
-    int     DefaultEnergyPoints = 50;
-    int     DefaultAttackDamage = 20;
+    int     DefaultEnergyPoints = 100;
+    int     DefaultAttackDamage = 30;
     int     TestIndex = 0;
 
     while (TestIndex < DefaultEnergyPoints + 1 && DefaultPoints - DefaultAttackDamage > 0)
     {
         d.attack("e");
-        if (TestIndex != DefaultEnergyPoints)
+        if (TestIndex != DefaultEnergyPoints && DefaultPoints > 0)
             e.takeDamage(DefaultAttackDamage);
         DefaultPoints -= DefaultAttackDamage;
         TestIndex++;
     }
-    d.guardGate();
+    d.highFiveGuys();
     return 0;
 }
