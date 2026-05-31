@@ -1,5 +1,9 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap() : ClapTrap()
+{
+    std::cout << "ScavTrap default constructor called" << std::endl;
+}
 
 ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
@@ -12,9 +16,9 @@ ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
-    this->HitPoints = 100;
-    this->EnergyPoints = 50;
-    this->AttackDamage = 20;
+    this->HitPoints = other.HitPoints;
+    this->EnergyPoints = other.EnergyPoints;
+    this->AttackDamage = other.AttackDamage;
     std::cout << "ScavTrap copy constructor called" << std::endl;
 }
 
@@ -24,9 +28,9 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other)
     if (this != &other)
     {
         ClapTrap::operator=(other);
-        this->HitPoints = 100;
-        this->EnergyPoints = 50;
-        this->AttackDamage = 20;
+        this->HitPoints = other.HitPoints;
+        this->EnergyPoints = other.EnergyPoints;
+        this->AttackDamage = other.AttackDamage;
     }
     return (*this);
 }

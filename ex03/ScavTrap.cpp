@@ -1,6 +1,10 @@
 #include "ScavTrap.hpp"
 
 
+ScavTrap::ScavTrap() : ClapTrap()
+{
+    std::cout << "FragTrap default constructor called" << std::endl;
+}
 ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
     this->HitPoints = 100;

@@ -1,6 +1,10 @@
 #include "FragTrap.hpp"
 
 
+FragTrap::FragTrap() : ClapTrap()
+{
+    std::cout << "FragTrap default constructor called" << std::endl;
+}
 FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 {
     this->name = Name;
@@ -12,9 +16,9 @@ FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 {
-    this->HitPoints = 100;
-    this->EnergyPoints = 100;
-    this->AttackDamage = 30;
+    this->HitPoints = other.HitPoints;
+    this->EnergyPoints = other.EnergyPoints;
+    this->AttackDamage = other.AttackDamage;
     std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
@@ -24,9 +28,9 @@ FragTrap& FragTrap::operator=(const FragTrap &other)
     if (this != &other)
     {
         ClapTrap::operator=(other);
-        this->HitPoints = 100;
-        this->EnergyPoints = 100;
-        this->AttackDamage = 30;
+        this->HitPoints = other.HitPoints;
+        this->EnergyPoints = other.EnergyPoints;
+        this->AttackDamage = other.AttackDamage;
     }
     return (*this);
 }
