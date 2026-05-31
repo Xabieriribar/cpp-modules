@@ -16,9 +16,9 @@ DiamondTrap::DiamondTrap(std::string Name) : ClapTrap(Name + "_clap_name"), Frag
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other), FragTrap(other), ScavTrap(other)
 {
-    this->HitPoints = FragTrap::HitPoints;
-    this->EnergyPoints = ScavTrap::EnergyPoints;
-    this->AttackDamage = FragTrap::AttackDamage;
+    this->HitPoints = other.HitPoints;
+    this->EnergyPoints = other.EnergyPoints;
+    this->AttackDamage = other.AttackDamage;
     std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
@@ -28,9 +28,9 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other)
     if (this != &other)
     {
         ClapTrap::operator=(other);
-    this->HitPoints = FragTrap::HitPoints;
-    this->EnergyPoints = ScavTrap::EnergyPoints;
-    this->AttackDamage = FragTrap::AttackDamage;
+    this->HitPoints = other.HitPoints;
+    this->EnergyPoints = other.EnergyPoints;
+    this->AttackDamage = other.AttackDamage;
     }
     return (*this);
 }
