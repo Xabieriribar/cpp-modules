@@ -1,7 +1,7 @@
 #include "DiamondTrap.hpp"
 
 
-DiamondTrap::DiamondTrap(std::string Name) : ClapTrap(Name + "_clap_name"), ScavTrap(Name), FragTrap(Name) 
+DiamondTrap::DiamondTrap(std::string Name) : ClapTrap(Name + "_clap_name"), FragTrap(Name), ScavTrap(Name) 
 {
     name = Name;
     this->HitPoints = FragTrap::HitPoints;
@@ -10,11 +10,11 @@ DiamondTrap::DiamondTrap(std::string Name) : ClapTrap(Name + "_clap_name"), Scav
     std::cout << "DiamondTrap default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other), ScavTrap(other), FragTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other), FragTrap(other), ScavTrap(other)
 {
-    this->HitPoints = 100;
-    this->EnergyPoints = 100;
-    this->AttackDamage = 30;
+    this->HitPoints = FragTrap::HitPoints;
+    this->EnergyPoints = ScavTrap::EnergyPoints;
+    this->AttackDamage = FragTrap::AttackDamage;
     std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
@@ -24,9 +24,9 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other)
     if (this != &other)
     {
         ClapTrap::operator=(other);
-        this->HitPoints = 100;
-        this->EnergyPoints = 100;
-        this->AttackDamage = 30;
+    this->HitPoints = FragTrap::HitPoints;
+    this->EnergyPoints = ScavTrap::EnergyPoints;
+    this->AttackDamage = FragTrap::AttackDamage;
     }
     return (*this);
 }
@@ -38,15 +38,7 @@ DiamondTrap::~DiamondTrap()
 
 void DiamondTrap::attack(const std::string& target)
 {
-    if (this->EnergyPoints > 0 && this->HitPoints > 0)
-    {
-        this->EnergyPoints -= 1;
-        std::cout << "Frag Trap " << this->name << " attacks " << target << ", causing " << this->AttackDamage << " points of damage!" << std::endl;
-    }
-    else
-        std::cout << "Frag Trap doesn't have enough power to attack." << std::endl;
-    std::cout << "Frag Trap " << this->name << " has now " << this->EnergyPoints <<  " energy points." << std::endl;
-    
+    ScavTrap::attack(target);
 }
 
 void DiamondTrap::whoAmI()

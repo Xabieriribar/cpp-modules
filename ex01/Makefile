@@ -9,6 +9,8 @@ all: $(NAME)
 $(NAME): $(OBJECT)
 	$(CC) $(FLAGS) $(OBJECT) -o $(NAME)
 
+%.o:%.cpp
+
 clean:
 	rm -f $(OBJECT)
 

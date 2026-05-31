@@ -1,5 +1,5 @@
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -Wshadow-all -Wshadow-field
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -Wno-shadow
+CXX = c++
 NAME = a.out
 SRC = $(wildcard *.cpp)
 OBJECT = $(SRC:.cpp=.o)
@@ -7,7 +7,10 @@ OBJECT = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECT)
-	$(CC) $(FLAGS) $(OBJECT) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJECT) -o $(NAME)
+
+%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECT)
@@ -17,4 +20,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY = all fclean clean re
+.PHONY : all fclean clean re
