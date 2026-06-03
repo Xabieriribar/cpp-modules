@@ -19,12 +19,13 @@ Cat& Cat::operator=(const Cat& other)
     {
         Animal::operator=(other);
         type = other.type;
-        this->brain = new Brain();
+        *(this->brain) = *(other.brain);
     }
     return (*this);
 }
 Cat::~Cat() 
 {
+    delete(brain);
     std::cout << "Cat default destructor called" << std::endl;
 };
 void    Cat::makeSound() const

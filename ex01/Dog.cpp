@@ -19,12 +19,13 @@ Dog& Dog::operator=(const Dog& other)
     {
         Animal::operator=(other);
         type = other.type;
-        this->brain = new Brain();
+        *(this->brain) = *(other.brain);
     }
     return (*this);
 }
 Dog::~Dog() 
 {
+    delete(brain);
     std::cout << "Dog default destructor called" << std::endl;
 };
 
