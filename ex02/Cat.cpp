@@ -1,12 +1,14 @@
 #include "Cat.hpp"
 Cat::Cat() : Animal()
 {
+    this->brain = new Brain();
     this->type = "Cat";
     std::cout << "Cat default constructor called" << std::endl;
 }
 Cat::Cat(const Cat& other) : Animal(other)
 {
     type = other.type;
+    this->brain = new Brain();
     std::cout << "Cat copy constructor called" << std::endl;
 }
 
@@ -17,11 +19,13 @@ Cat& Cat::operator=(const Cat& other)
     {
         Animal::operator=(other);
         type = other.type;
+        *(this->brain) = *(other.brain);
     }
     return (*this);
 }
 Cat::~Cat() 
 {
+    delete(brain);
     std::cout << "Cat default destructor called" << std::endl;
 };
 void    Cat::makeSound() const
