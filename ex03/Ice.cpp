@@ -1,23 +1,24 @@
 #include "Ice.hpp"
 
-Ice::Ice(std::string const & type) : AMateria(type), _type(type) {}
+Ice::Ice() : AMateria("Ice") {}
 
-Ice::Ice(Ice const &other)
-{
-  _type = other._type;
-}
+Ice::Ice(Ice const &other) : AMateria("Ice") {}
 
 Ice& Ice::operator=(Ice const &other)
 {
   if (this != &other)
   {
     _type = other._type;
+    AMateria::operator=(other);
   }
-  return (*this)
+  return (*this);
 }
 
-Ice::~Ice()
+Ice::~Ice() {}
+
+AMateria* Ice::clone() const
 {
-  delete()
-}
+    AMateria *object = new Ice();
 
+    return (object);
+}

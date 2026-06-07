@@ -2,12 +2,14 @@
 
 AMateria::AMateria(std::string const & type) : _type(type) {}
 
-AMateria::AMateria(AMateria const &other)
+AMateria::AMateria() : _type(NULL) {}
+
+AMateria::AMateria(const AMateria &other)
 {
   _type = other._type;
 }
 
-AMateria& AMateria::operator=(AMateria const &other)
+AMateria& AMateria::operator=(const AMateria &other)
 {
   if (this != &other)
   {
@@ -16,12 +18,11 @@ AMateria& AMateria::operator=(AMateria const &other)
   return (*this)
 }
 
-AMateria::~AMateria()
-{
-  delete()
-}
+AMateria::~AMateria() {}
 
-std::string const & AMateria::getType()
+std::string const & AMateria::getType() const
 {
   return (_type); 
 }
+
+virtual void use(ICharacter& target);
