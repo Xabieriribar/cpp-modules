@@ -1,6 +1,6 @@
 #include "Character.hpp"
 
-Character::Character(std::string const & name) : _name(name) 
+Character::Character(std::string const & name) : _name(name), _index(0) 
 {
     int i = 0;
     while (i < 4)
@@ -10,7 +10,7 @@ Character::Character(std::string const & name) : _name(name)
     }
 }
 
-Character::Character(const Character &other) : ICharacter(other), _name(other._name) 
+Character::Character(const Character &other) : ICharacter(other), _name(other._name), _index(other._index) 
 {
     int i = 0;
     while (i < 4)
@@ -30,28 +30,23 @@ Character& Character::operator=(const Character &other)
             ICharacter::operator=(other);
             _inventory[i] = other._inventory[i];
             _name = other._name;
+            _index = other._index;
             i++;
         }
     }
     return (*this);
 }
 
-Character::~Character() {} 
-
 void Character::equip(AMateria* m)
 {
     int i = 0;
-    while (i < 4)
-    {
-        if (!_inventory[i])
-        {
-            _inventory[i] = m;
-            return ;
-        }
+    while (i < _index)
         i++;
-    }
-
+    _index = i;
+    _inventory[i] = m;
+    _index++;
 }
+
 void Character::unequip(int idx)
 {
     int i = 0;
@@ -80,4 +75,15 @@ void Character::use(int idx, ICharacter& target)
 std::string const & Character::getName() const
 {
     return (_name);
+}
+
+Character::~Character() 
+{
+    int i = 0;
+    while (i < _index)
+    {
+        delete(_inventory[i]);
+        i++;
+    }
+
 }

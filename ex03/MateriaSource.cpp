@@ -1,6 +1,14 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource() : IMateriaSource(), _index(0) {}
+MateriaSource::MateriaSource() : IMateriaSource(), _index(0) 
+{
+    int i = 0;
+    while (i < 4)
+    {
+        _templates[i] = NULL;
+        i++;
+    }
+}
 
 MateriaSource::MateriaSource(const MateriaSource &other) : IMateriaSource(other)
 {
@@ -53,4 +61,14 @@ AMateria* MateriaSource::createMateria(std::string const & type)
     newMateria = _templates[i]->clone();
     _index++;
     return (newMateria);
+}
+
+MateriaSource::~MateriaSource()
+{
+    int i = 0;
+    while (i < _index)
+    {
+        delete(_templates[i]);
+        i++;
+    }
 }
