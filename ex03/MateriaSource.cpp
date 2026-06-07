@@ -1,16 +1,8 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource() : IMateriaSource() 
-{
-    int i = 0;
-    while (i < 4)
-    {
-        _templates[i] = NULL;
-        i++;
-    }
-}
+MateriaSource::MateriaSource() : IMateriaSource(), _index(0) {}
 
-MateriaSource::MateriaSource(const MateriaSource &other)
+MateriaSource::MateriaSource(const MateriaSource &other) : IMateriaSource(other)
 {
     int i = 0;
     while (i < 4)
@@ -27,14 +19,13 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
     int i = 0;
     while (i < 4)
     {
+        IMateriaSource::operator=(other);
         _templates[i] = other._templates[i];
         i++;
     }
   }
   return (*this);
 }
-
-MateriaSource::~MateriaSource() {}
 
 void MateriaSource::learnMateria(AMateria* m)       
 {
@@ -56,14 +47,10 @@ AMateria* MateriaSource::createMateria(std::string const & type)
         return (NULL);
     int i = 0;
     AMateria *newMateria;
-    while (i < 4)
-    {
-        if (_templates[i])
-        {
-            newMateria = _templates[i]->clone();
-            return (newMateria);
-        }
+    while (i < _index)
         i++;
-    }
-    return (NULL);
+    _index = i;
+    newMateria = _templates[i]->clone();
+    _index++;
+    return (newMateria);
 }
