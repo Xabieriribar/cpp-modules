@@ -24,5 +24,3 @@ std::string const & AMateria::getType() const
 {
   return (_type); 
 }
-
-virtual void use(ICharacter& target);

@@ -66,5 +66,5 @@ void Character::unequip(int idx)
 }
 void Character::use(int idx, ICharacter& target)
 {
-
+    _inventory[idx]->use(target);
 }
