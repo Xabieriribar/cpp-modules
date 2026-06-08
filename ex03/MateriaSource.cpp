@@ -51,6 +51,7 @@ void MateriaSource::learnMateria(AMateria* m)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
+  return NULL;
     if (type != "ice" && type != "cure")
         return (NULL);
     int i = 0;
