@@ -28,7 +28,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
     while (i < 4)
     {
         IMateriaSource::operator=(other);
-        _templates[i] = other._templates[i];
+        *(_templates[i]) = *(other._templates[i]);
         i++;
     }
   }
@@ -43,6 +43,7 @@ void MateriaSource::learnMateria(AMateria* m)
         if (!_templates[i])
         {
             _templates[i] = m->clone();
+            delete(m);
             return ;
         }
         i++;
@@ -51,7 +52,6 @@ void MateriaSource::learnMateria(AMateria* m)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-  return NULL;
     if (type != "ice" && type != "cure")
         return (NULL);
     int i = 0;
