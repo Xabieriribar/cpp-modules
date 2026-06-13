@@ -19,6 +19,8 @@ class Fixed
         Fixed &operator=(const Fixed &other);
         Fixed operator++(int);
         Fixed &operator++(void);
+        Fixed operator--(int);
+        Fixed &operator--(void);
         bool operator>(const Fixed &other) const;
         bool operator<(const Fixed &other) const;
         bool operator>=(const Fixed &other) const;
