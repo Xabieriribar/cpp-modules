@@ -43,7 +43,6 @@ void MateriaSource::learnMateria(AMateria* m)
         if (!_templates[i])
         {
             _templates[i] = m->clone();
-            _index++;
             delete(m);
             return ;
         }
@@ -55,11 +54,13 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 {
     int i = 0;
     AMateria *newMateria;
+    std::cout << "Value of _index " << _index << std::endl;
     while (i < _index)
     {
         if (_templates[i]->getType() == type)
         {
             _index = i;
+            _index++;
             newMateria = _templates[i]->clone();
             return (newMateria);
         }
@@ -68,6 +69,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
     if (_templates[i]->getType() == type)
     {
         _index = i;
+        _index++;
         newMateria = _templates[i]->clone();
         return (newMateria);
     }
@@ -77,7 +79,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 MateriaSource::~MateriaSource()
 {
     int i = 0;
-    while (i < _index)
+    while (_templates[i])
     {
         delete(_templates[i]);
         i++;

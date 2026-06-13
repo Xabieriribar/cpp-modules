@@ -12,12 +12,13 @@ int main()
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
     ICharacter* bob = new Character("bob");
-    ICharacter* me = new Character("me");
-    me->equip(src->createMateria("ice"));  // slot 0
-    me->equip(src->createMateria("cure")); // slot 1
-    me->equip(src->createMateria("ice"));  // slot 2
-    me->equip(src->createMateria("cure")); // slot 3
-    me->equip(src->createMateria("ice"));  // should do nothing safely
+    Character original("original");
+    original.equip(src->createMateria("ice"));
+
+    Character copy(original);
+
+    original.unequip(0);
+    copy.use(0, *bob);
     delete bob;
     delete src;
     return 0;

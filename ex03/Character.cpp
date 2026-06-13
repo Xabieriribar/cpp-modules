@@ -30,7 +30,10 @@ Character& Character::operator=(const Character &other)
         while (i < 4)
         {
             ICharacter::operator=(other);
-            _inventory[i] = other._inventory[i];
+            if (_inventory[i])
+                _inventory[i] = other._inventory[i]->clone();
+            else
+                _inventory[i] = NULL;
             _savedMateria[i] = other._savedMateria[i];
             _name = other._name;
             _index = other._index;
@@ -61,8 +64,8 @@ void Character::unequip(int idx)
     int j = 0;
     while (_savedMateria[i])
       i++;
-    _savedMateria[i] = _inventory[idx]->clone();
-    delete(_inventory[idx]);
+    _savedMateria[i] = _inventory[idx];
+    _inventory[idx] = 0;
     i = 0;
     while (i < _index)
     {
@@ -77,7 +80,10 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-    _inventory[idx]->use(target);
+    if (idx < 0 || idx > 3)
+        return ;
+    if (_inventory[idx])
+        _inventory[idx]->use(target);
 }
 
 std::string const & Character::getName() const
@@ -91,6 +97,12 @@ Character::~Character()
     while (i < _index)
     {
         delete(_inventory[i]);
+        i++;
+    }
+    i = 0;
+    while (_savedMateria[i])
+    {
+        delete(_savedMateria[i]);
         i++;
     }
 
