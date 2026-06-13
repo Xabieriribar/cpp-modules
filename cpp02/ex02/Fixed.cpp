@@ -63,7 +63,7 @@ std::ostream &operator<<(std::ostream &o, Fixed const &i)
 
 bool Fixed::operator>(const Fixed &other) const
 {
-    if (this->getRawBits() > other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -71,7 +71,7 @@ bool Fixed::operator>(const Fixed &other) const
 
 bool Fixed::operator<(const Fixed &other) const
 {
-    if (this->getRawBits() < other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -79,7 +79,7 @@ bool Fixed::operator<(const Fixed &other) const
 
 bool Fixed::operator>=(const Fixed &other) const
 {
-    if (this->getRawBits() >= other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -87,7 +87,7 @@ bool Fixed::operator>=(const Fixed &other) const
 
 bool Fixed::operator<=(const Fixed &other) const
 {
-    if (this->getRawBits() <= other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -95,7 +95,7 @@ bool Fixed::operator<=(const Fixed &other) const
 
 bool Fixed::operator==(const Fixed &other) const
 {
-    if (this->getRawBits() == other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -103,7 +103,7 @@ bool Fixed::operator==(const Fixed &other) const
 
 bool Fixed::operator!=(const Fixed &other) const
 {
-    if (this->getRawBits() != other.getRawBits())
+    if (FixedPointNumber > other.FixedPointNumber)
         return (true);
     else
         return (false);
@@ -133,7 +133,7 @@ Fixed Fixed::operator+(const Fixed &other) const
 {
     Fixed result;
 
-    result.setRawBits(this->getRawBits() + other.getRawBits());
+    result.setRawBits(FixedPointNumber + other.FixedPointNumber);
     return (result);
 }
 
@@ -141,7 +141,7 @@ Fixed Fixed::operator-(const Fixed &other) const
 {
     Fixed result;
 
-    result.setRawBits(this->getRawBits() - other.getRawBits());
+    result.setRawBits(FixedPointNumber - other.FixedPointNumber);
     return (result);
 }
 
