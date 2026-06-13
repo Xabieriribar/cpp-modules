@@ -1,6 +1,6 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource() : IMateriaSource(), _index(0) 
+MateriaSource::MateriaSource() : IMateriaSource() 
 {
     int i = 0;
     while (i < 4)
@@ -15,7 +15,10 @@ MateriaSource::MateriaSource(const MateriaSource &other) : IMateriaSource(other)
     int i = 0;
     while (i < 4)
     {
-        _templates[i] = other._templates[i];
+        if (other._templates[i])
+            _templates[i] = other._templates[i];
+        else
+            _templates[i] = NULL;
         i++;
     }
 }
@@ -28,7 +31,10 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
     while (i < 4)
     {
         IMateriaSource::operator=(other);
-        *(_templates[i]) = *(other._templates[i]);
+        if (other._templates[i])
+            _templates[i] = other._templates[i];
+        else
+            _templates[i] = NULL;
         i++;
     }
   }
@@ -54,24 +60,14 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 {
     int i = 0;
     AMateria *newMateria;
-    std::cout << "Value of _index " << _index << std::endl;
-    while (i < _index)
+    while (i < 4)
     {
-        if (_templates[i]->getType() == type)
+        if (_templates[i] && _templates[i]->getType() == type)
         {
-            _index = i;
-            _index++;
             newMateria = _templates[i]->clone();
             return (newMateria);
         }
         i++;
-    }
-    if (_templates[i]->getType() == type)
-    {
-        _index = i;
-        _index++;
-        newMateria = _templates[i]->clone();
-        return (newMateria);
     }
     return (NULL);
 }
