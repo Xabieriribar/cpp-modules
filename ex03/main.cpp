@@ -11,17 +11,14 @@ int main()
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
-    ICharacter* me = new Character("me");
-    AMateria* tmp;
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
     ICharacter* bob = new Character("bob");
-    me->use(0, *bob);
-    me->use(1, *bob);
+    ICharacter* me = new Character("me");
+    me->equip(src->createMateria("ice"));  // slot 0
+    me->equip(src->createMateria("cure")); // slot 1
+    me->equip(src->createMateria("ice"));  // slot 2
+    me->equip(src->createMateria("cure")); // slot 3
+    me->equip(src->createMateria("ice"));  // should do nothing safely
     delete bob;
-    delete me;
     delete src;
     return 0;
 }

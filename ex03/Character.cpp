@@ -45,6 +45,11 @@ void Character::equip(AMateria* m)
     int i = 0;
     while (i < _index)
         i++;
+    if (i == 4)
+    {
+        std::cout << "Returned safely for " << m->getType() << std::endl;
+        return ;
+    }
     _index = i;
     _inventory[i] = m;
     _index++;
