@@ -1,10 +1,11 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
-NAME = phonebook
-SRC = main.cpp PhoneBook.cpp \
-		Contact.cpp
-OBJECT = main.o PhoneBook.o \
-		Contact.o
+NAME = global_banksters
+SRC = Account.cpp \
+	tests.cpp
+
+OBJECT = Account.o \
+			tests.o
 
 all: $(NAME)
 
