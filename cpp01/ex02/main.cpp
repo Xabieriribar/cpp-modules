@@ -10,7 +10,7 @@ int main(void)
     std::string &stringREF = hiThisIsBrain;
 
     std::cout << &hiThisIsBrain << std::endl;
-    std::cout << &stringPTR << std::endl;
+    std::cout << stringPTR << std::endl;
     std::cout << &stringREF << std::endl;
 
     std::cout << hiThisIsBrain << std::endl;
