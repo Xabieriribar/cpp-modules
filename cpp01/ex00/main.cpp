@@ -2,8 +2,12 @@
 
 int main(void)
 {
-    randomChump("Foo1");
-    Zombie *zombie = newZombie("Foo2");
+    std::cout << "=== stack zombie ===" << std::endl;
+    randomChump("Stack");
+
+    std::cout << "=== heap zombie ===" << std::endl;
+    Zombie *zombie = newZombie("Heap");
     zombie->announce();
-    delete(zombie);
+    delete zombie;
+    return (0);
 }

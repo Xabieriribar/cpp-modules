@@ -9,12 +9,12 @@ int main(void)
     stringPTR = &hiThisIsBrain;
     std::string &stringREF = hiThisIsBrain;
 
-    std::cout << &hiThisIsBrain << std::endl;
-    std::cout << stringPTR << std::endl;
-    std::cout << &stringREF << std::endl;
+    std::cout << "string address:   " << &hiThisIsBrain << std::endl;
+    std::cout << "pointer address:  " << stringPTR << std::endl;
+    std::cout << "reference address:" << &stringREF << std::endl;
 
-    std::cout << hiThisIsBrain << std::endl;
-    std::cout << *stringPTR << std::endl;
-    std::cout << stringREF << std::endl;
-
+    std::cout << "string value:   " << hiThisIsBrain << std::endl;
+    std::cout << "pointer value:  " << *stringPTR << std::endl;
+    std::cout << "reference value:" << stringREF << std::endl;
+    return (0);
 }

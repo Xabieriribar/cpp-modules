@@ -6,15 +6,14 @@ int main(void)
     int index;
     Zombie *horde;
 
-    numberOfZombies = 10;
-    horde = zombieHorde(numberOfZombies, "Xabi");
+    numberOfZombies = 5;
+    horde = zombieHorde(numberOfZombies, "Horde");
     index = 0;
     while (index < numberOfZombies)
     {
         horde[index].announce();
         index++;
     }
-    delete[] horde;
-    return 0;
-
+    delete [] horde;
+    return (0);
 }

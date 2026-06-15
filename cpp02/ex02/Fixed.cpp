@@ -5,7 +5,7 @@ Fixed::Fixed() : FixedPointNumber(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value) : FixedPointNumber(value << Bits) 
+Fixed::Fixed(const int value) : FixedPointNumber(value * (1 << Bits))
 {
     std::cout << "Int constructor called" << std::endl;
 }
@@ -47,7 +47,7 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt(void) const
 {
-    return (FixedPointNumber >> Bits);
+    return (FixedPointNumber / (1 << Bits));
 }
 
 float Fixed::toFloat(void) const
@@ -63,50 +63,32 @@ std::ostream &operator<<(std::ostream &o, Fixed const &i)
 
 bool Fixed::operator>(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber > other.FixedPointNumber);
 }
 
 bool Fixed::operator<(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber < other.FixedPointNumber);
 }
 
 bool Fixed::operator>=(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber >= other.FixedPointNumber);
 }
 
 bool Fixed::operator<=(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber <= other.FixedPointNumber);
 }
 
 bool Fixed::operator==(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber == other.FixedPointNumber);
 }
 
 bool Fixed::operator!=(const Fixed &other) const
 {
-    if (FixedPointNumber > other.FixedPointNumber)
-        return (true);
-    else
-        return (false);
+    return (FixedPointNumber != other.FixedPointNumber);
 }
 
 Fixed Fixed::operator*(const Fixed &other) const

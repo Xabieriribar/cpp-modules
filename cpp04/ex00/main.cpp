@@ -6,6 +6,7 @@
 
 int main()
 {
+    std::cout << "=== correct polymorphism ===" << std::endl;
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
@@ -18,6 +19,7 @@ int main()
     delete(i);
     delete(meta);
 
+    std::cout << "=== wrong polymorphism ===" << std::endl;
     const WrongAnimal* beta = new WrongAnimal();
     const WrongAnimal* x = new WrongCat();
     std::cout << x->getType() << " " << std::endl;

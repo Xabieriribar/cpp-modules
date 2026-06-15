@@ -1,8 +1,10 @@
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
-CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+CXX = c++
 NAME = a.out
 SRC = $(wildcard *.cpp)
 OBJECT = $(SRC:.cpp=.o)
+
+all: $(NAME)
 
 $(NAME): $(OBJECT)
 	$(CXX) $(CXXFLAGS) $(OBJECT) -o $(NAME)

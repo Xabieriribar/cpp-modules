@@ -3,7 +3,7 @@
 HumanB::HumanB(std::string name) : _name(name), _weapon(NULL) {
     hasWeapon = false;
 } 
-HumanB::HumanB(std::string name, Weapon *weapon) : _name(name), _weapon(weapon) {} 
+HumanB::HumanB(std::string name, Weapon *weapon) : _name(name), _weapon(weapon), hasWeapon(weapon != NULL) {}
 
 void HumanB::attack()
 {
@@ -17,5 +17,4 @@ void HumanB::setWeapon(Weapon &weapon)
 {
     hasWeapon = true;
     _weapon = &weapon;
-    _weapon->setType(weapon.getType());
 }

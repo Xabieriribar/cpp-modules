@@ -3,8 +3,6 @@
 int main(int argc, char **argv)
 {
     Harl harl;
-    size_t Index = 0;
-    size_t NumberOfLevels = 4;
 
     if (argc != 2)
     {

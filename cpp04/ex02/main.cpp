@@ -4,25 +4,19 @@
 
 int main()
 {
-    Animal* AnimalObjects[10];
-    const Animal *AnimalObject = new Animal();
+    Animal* animals[4];
     int i = 0;
 
-
-    while (i < 5)
-        AnimalObjects[i++] = new Dog();
-    while (i < 10)
-        AnimalObjects[i++] = new Cat();
+    std::cout << "=== abstract base through pointers ===" << std::endl;
+    while (i < 2)
+        animals[i++] = new Dog();
+    while (i < 4)
+        animals[i++] = new Cat();
     i = 0;
-    //Tests for exercise 02
-    //First, lets make sure our AnimalObjects are still able to bark or meow
-    AnimalObjects[0]->makeSound(); //Should bark
-    AnimalObjects[5]->makeSound(); //Should meow
-    //Second, lets make sure the Animal pointer is not able to speak
-    AnimalObject->makeSound();
-    while (i < 10)
+    while (i < 4)
     {
-        delete(AnimalObjects[i]);
+        animals[i]->makeSound();
+        delete animals[i];
         i++;
     }
     return (0);

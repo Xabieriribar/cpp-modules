@@ -2,23 +2,16 @@
 
 int main(void)
 {
-    ClapTrap a("Bartolomeo");
-    ClapTrap b(a);
-    ClapTrap c("Manolin");
-    int     DefaultPoints = 10;
-    int     DefaultEnergyPoints = 100;
-    int     RepairValue = 1;
-    int     DefaultAttackDamage = 1;
-    int     TestIndex = 0;
+    ClapTrap robot("CL4P");
 
-    c = b;
-    while (TestIndex < DefaultEnergyPoints + 1)
-    {
-        a.attack("b");
-        if (TestIndex != DefaultEnergyPoints)
-            b.takeDamage(DefaultAttackDamage);
-        TestIndex++;
-    }
-    a.beRepaired(RepairValue);
-    return 0;
+    std::cout << "=== normal actions ===" << std::endl;
+    robot.attack("target");
+    robot.takeDamage(4);
+    robot.beRepaired(2);
+
+    std::cout << "=== lethal damage ===" << std::endl;
+    robot.takeDamage(100);
+    robot.attack("target");
+    robot.beRepaired(2);
+    return (0);
 }

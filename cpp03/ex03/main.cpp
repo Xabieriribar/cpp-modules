@@ -2,21 +2,17 @@
 
 int main(void)
 {
-    DiamondTrap d("Scabitrabi");
-    DiamondTrap e("Xabi");
-    int     DefaultPoints = 100;
-    int     DefaultEnergyPoints = 100;
-    int     DefaultAttackDamage = 30;
-    int     TestIndex = 0;
+    DiamondTrap diamond("Diamond");
 
-    while (TestIndex < DefaultEnergyPoints + 1 && DefaultPoints - DefaultAttackDamage > 0)
-    {
-        d.attack("e");
-        if (TestIndex != DefaultEnergyPoints && DefaultPoints > 0)
-            e.takeDamage(DefaultAttackDamage);
-        DefaultPoints -= DefaultAttackDamage;
-        TestIndex++;
-    }
-    d.whoAmI();
-    return 0;
+    std::cout << "=== diamond identity ===" << std::endl;
+    diamond.whoAmI();
+    std::cout << "=== inherited abilities ===" << std::endl;
+    diamond.attack("target");
+    diamond.guardGate();
+    diamond.highFivesGuys();
+
+    std::cout << "=== copy ===" << std::endl;
+    DiamondTrap copy(diamond);
+    copy.whoAmI();
+    return (0);
 }

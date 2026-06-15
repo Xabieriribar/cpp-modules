@@ -110,6 +110,7 @@ run_program() {
     local dir="$1"; shift
     local exe="$1"; shift
     local input_file="${1:-}"
+    [ "$#" -eq 0 ] || shift
     local out="$TMPROOT/stdout.txt"
     local err="$TMPROOT/stderr.txt"
     : > "$out"
@@ -143,6 +144,7 @@ run_valgrind() {
     local dir="$1"; shift
     local exe="$1"; shift
     local input_file="${1:-}"
+    [ "$#" -eq 0 ] || shift
     local vg="$TMPROOT/valgrind.txt"
     if [ "$VALGRIND" = "0" ]; then
         info "Valgrind disabled"

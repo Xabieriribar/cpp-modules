@@ -3,19 +3,16 @@
 int main(void)
 {
     Harl harl;
-    size_t Index = 0;
-    size_t NumberOfLevels = 4;
+    size_t index = 0;
     std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-    while (Index < NumberOfLevels)
+    while (index < 4)
     {
-        harl.complain(levels[Index]);
-        if (!harl.getFlag())
-            return (2);
-        Index++;
+        std::cout << "[ " << levels[index] << " ]" << std::endl;
+        harl.complain(levels[index]);
+        index++;
     }
+    std::cout << "[ INVALID ]" << std::endl;
     harl.complain("INVALID LEVEL");
-    if (!harl.getFlag())
-        return (2);
     return (0);
 }

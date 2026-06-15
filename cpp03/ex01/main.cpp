@@ -2,21 +2,16 @@
 
 int main(void)
 {
-    ScavTrap d("Scabitrabi");
-    ScavTrap e("Xabi");
-    int     DefaultPoints = 100;
-    int     DefaultEnergyPoints = 50;
-    int     DefaultAttackDamage = 20;
-    int     TestIndex = 0;
+    ScavTrap scav("Serena");
 
-    while (TestIndex < DefaultEnergyPoints + 1 && DefaultPoints - DefaultAttackDamage > 0)
-    {
-        d.attack("e");
-        if (TestIndex != DefaultEnergyPoints)
-            e.takeDamage(DefaultAttackDamage);
-        DefaultPoints -= DefaultAttackDamage;
-        TestIndex++;
-    }
-    d.guardGate();
-    return 0;
+    std::cout << "=== inherited and overridden actions ===" << std::endl;
+    scav.attack("target");
+    scav.takeDamage(20);
+    scav.beRepaired(10);
+    scav.guardGate();
+
+    std::cout << "=== copy ===" << std::endl;
+    ScavTrap copy(scav);
+    copy.attack("another target");
+    return (0);
 }

@@ -4,19 +4,24 @@
 
 int main()
 {
-    Animal* AnimalObjects[10];
+    Animal* animals[6];
     int i = 0;
 
-
-    while (i < 5)
-        AnimalObjects[i++] = new Dog();
-    while (i < 10)
-        AnimalObjects[i++] = new Cat();
+    std::cout << "=== polymorphic array ===" << std::endl;
+    while (i < 3)
+        animals[i++] = new Dog();
+    while (i < 6)
+        animals[i++] = new Cat();
     i = 0;
-    while (i < 10)
+    while (i < 6)
     {
-        delete(AnimalObjects[i]);
+        animals[i]->makeSound();
+        delete animals[i];
         i++;
     }
+    std::cout << "=== deep-copy smoke test ===" << std::endl;
+    Dog original;
+    Dog copy(original);
+    copy = original;
     return (0);
 }

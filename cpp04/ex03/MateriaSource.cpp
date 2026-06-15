@@ -16,7 +16,7 @@ MateriaSource::MateriaSource(const MateriaSource &other) : IMateriaSource(other)
     while (i < 4)
     {
         if (other._templates[i])
-            _templates[i] = other._templates[i];
+            _templates[i] = other._templates[i]->clone();
         else
             _templates[i] = NULL;
         i++;
@@ -30,9 +30,9 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
     int i = 0;
     while (i < 4)
     {
-        IMateriaSource::operator=(other);
+        delete _templates[i];
         if (other._templates[i])
-            _templates[i] = other._templates[i];
+            _templates[i] = other._templates[i]->clone();
         else
             _templates[i] = NULL;
         i++;
@@ -44,6 +44,8 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
 void MateriaSource::learnMateria(AMateria* m)       
 {
     int i = 0;
+    if (!m)
+        return ;
     while (i < 4)
     {
         if (!_templates[i])
@@ -75,9 +77,9 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 MateriaSource::~MateriaSource()
 {
     int i = 0;
-    while (_templates[i])
+    while (i < 4)
     {
-        delete(_templates[i]);
+        delete _templates[i];
         i++;
     }
 }

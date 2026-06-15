@@ -1,22 +1,17 @@
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main(void)
 {
-    FragTrap d("Scabitrabi");
-    FragTrap e("Xabi");
-    int     DefaultPoints = 100;
-    int     DefaultEnergyPoints = 100;
-    int     DefaultAttackDamage = 30;
-    int     TestIndex = 0;
+    ScavTrap scav("Scav");
+    FragTrap frag("Frag");
 
-    while (TestIndex < DefaultEnergyPoints + 1 && DefaultPoints - DefaultAttackDamage > 0)
-    {
-        d.attack("e");
-        if (TestIndex != DefaultEnergyPoints && DefaultPoints > 0)
-            e.takeDamage(DefaultAttackDamage);
-        DefaultPoints -= DefaultAttackDamage;
-        TestIndex++;
-    }
-    d.highFiveGuys();
-    return 0;
+    std::cout << "=== ScavTrap ===" << std::endl;
+    scav.attack("target");
+    scav.guardGate();
+
+    std::cout << "=== FragTrap ===" << std::endl;
+    frag.attack("target");
+    frag.highFivesGuys();
+    return (0);
 }

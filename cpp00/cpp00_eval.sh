@@ -78,7 +78,9 @@ run_vg() {
 }
 
 general_scan() {
-    local ex="$1" dir="$ROOT/$1" out="$TMPDIR/${ex}_scan.out"
+    local ex="$1"
+    local dir="$ROOT/$1"
+    local out="$TMPDIR/${ex}_scan.out"
     # Do not scan ex02/tests.cpp for vector/algorithm: it is supplied by the subject/intranet.
     find "$dir" -type f \( -name '*.cpp' -o -name '*.hpp' -o -name '*.h' \) \
         ! -path "$dir/tests.cpp" \
@@ -92,7 +94,8 @@ general_scan() {
 }
 
 check_make_flags() {
-    local ex="$1" mf="$ROOT/$ex/Makefile"
+    local ex="$1"
+    local mf="$ROOT/$ex/Makefile"
     if [ ! -f "$mf" ]; then fail "$ex Makefile exists"; return; fi
     ok "$ex Makefile exists"
     local txt; txt="$(tr '\n' ' ' < "$mf")"
