@@ -3,7 +3,8 @@
 #define FORM_HPP
 
 #include <iostream>
-#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form  
 {
@@ -31,7 +32,7 @@ class Form
         void throwException() const;
         void getReason() const;
         bool getFormState(bool printState) const;
-        void beSigned(Bureaucrat const &bureaucrat) const;
+        void beSigned(const Bureaucrat &bureaucrat);
         int getGradeToSign() const;
         int getGradeToExecute() const;
 };

@@ -1,27 +1,28 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) 
 {
-    try 
-    {
-        throwException();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    // try 
+    // {
+    //     throwException();
+    // }
+    // catch (std::exception & e)
+    // {
+    //     std::cerr << e.what() << '\n';
+    // }
 }
 
 Form::Form(Form const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) 
 {
-    try 
-    {
-        throwException();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    // try 
+    // {
+    //     throwException();
+    // }
+    // catch (std::exception & e)
+    // {
+    //     std::cerr << e.what() << '\n';
+    // }
 }
 
 Form& Form::operator=(const Form &other)
@@ -77,7 +78,7 @@ const char* Form::gradeTooHighException::what() const throw()
     return "The grade required to sign this form is superior than the grade of the bureaucrat";
 }
 
-void Form::beSigned(Bureaucrat const &bureaucrat) const
+void Form::beSigned(const Bureaucrat &bureaucrat)
 {
     try
     {
