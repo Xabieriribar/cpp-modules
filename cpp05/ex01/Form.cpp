@@ -10,7 +10,7 @@ void    Form::throwException() const
             throw (gradeTooLowException());
 }
 
-Form::Form(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) 
+Form::Form(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
     try
     {
@@ -18,13 +18,12 @@ Form::Form(std::string const formName, int const gradeToSign, int const gradeToE
     }
     catch (std::exception & e)
     {
-        setReason(e.what());
         std::cerr << e.what() << "\n";
     }
     
 }
 
-Form::Form(Form const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) 
+Form::Form(Form const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 {
     try
     {
@@ -101,14 +100,4 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
     {
         std::cerr << e.what() << '\n';
     }
-}
-
-void Form::setReason(std::string reason)
-{
-    _reason = reason;
-}
-
-Form::getReason()
-{
-    return (_reason);
 }

@@ -23,10 +23,5 @@ int main(void)
     Bureaucrat boringBureaucrat("Fritz", 10);
     boringBureaucrat.signForm(frm);
 
-    std::cout << "<<< TEST 4 : INSTAITE A BUREAUCRAT WITH A GRADE SUPERIOR TO THE FORM GRADE AND TRY TO SIGN IT >>> \n";
-
-    Bureaucrat boringBureaucrat("Fritz", 10);
-    boringBureaucrat.signForm(frm);
-
     return 0;
 }
