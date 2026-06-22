@@ -100,8 +100,8 @@ void Bureaucrat::signForm(Form &frm)
 {
     frm.beSigned(*this);
     if (frm.getFormState(false))
-        std::cout << _name << " signed" << frm.getName();
+        std::cout << _name << " signed " << frm.getName() << std::endl;
     else
-        std::cout << _name << " couldn't sign " << frm.getName() << " because";
+        std::cout << _name << " couldn't sign " << frm.getName() << " because " <<  << std::endl;
 
 }

@@ -1,28 +1,39 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+
+void    Form::throwException() const
+{
+        if (_gradeToExecute < 1 || _gradeToSign < 1)
+            throw (gradeTooHighException());
+        else if (_gradeToExecute > 150 || _gradeToSign > 150)
+            throw (gradeTooLowException());
+}
+
 Form::Form(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) 
 {
-    // try 
-    // {
-    //     throwException();
-    // }
-    // catch (std::exception & e)
-    // {
-    //     std::cerr << e.what() << '\n';
-    // }
+    try
+    {
+        throwException();
+    }
+    catch (std::exception & e)
+    {
+        setReason(e.what());
+        std::cerr << e.what() << "\n";
+    }
+    
 }
 
 Form::Form(Form const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) 
 {
-    // try 
-    // {
-    //     throwException();
-    // }
-    // catch (std::exception & e)
-    // {
-    //     std::cerr << e.what() << '\n';
-    // }
+    try
+    {
+        throwException();
+    }
+    catch (std::exception & e)
+    {
+        std::cerr << e.what() << "\n";
+    }
 }
 
 Form& Form::operator=(const Form &other)
@@ -71,11 +82,11 @@ std::ostream &operator<<(std::ostream &o, Form const &i)
 
 const char* Form::gradeTooLowException::what() const throw()
 {
-    return "The grade required to sign this form is superior than the grade of the bureaucrat";
+    return "the grade required to sign this form is superior than the grade of the bureaucrat";
 }
 const char* Form::gradeTooHighException::what() const throw()
 {
-    return "The grade required to sign this form is superior than the grade of the bureaucrat";
+    return "the grade required to sign this form is superior than the grade of the bureaucrat";
 }
 
 void Form::beSigned(const Bureaucrat &bureaucrat)
@@ -90,4 +101,14 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
     {
         std::cerr << e.what() << '\n';
     }
+}
+
+void Form::setReason(std::string reason)
+{
+    _reason = reason;
+}
+
+Form::getReason()
+{
+    return (_reason);
 }

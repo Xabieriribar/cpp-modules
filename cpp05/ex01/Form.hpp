@@ -13,6 +13,7 @@ class Form
         bool              _isSigned;
         int const         _gradeToSign;
         int const         _gradeToExecute;
+        std::string&     _reason;
     public:
         Form(std::string const formName, int const gradeToSign, int const gradeToExecute);
         Form(Form const &other);
@@ -35,6 +36,8 @@ class Form
         void beSigned(const Bureaucrat &bureaucrat);
         int getGradeToSign() const;
         int getGradeToExecute() const;
+        void    throwException() const;
+        void    setReason(std::string reason);
 };
 
 std::ostream &operator<<(std::ostream &o, Form const &i);
