@@ -1,6 +1,15 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+const char* Form::gradeTooLowException::what() const throw()
+{
+    return "the grade is too low.";
+}
+
+const char* Form::gradeTooHighException::what() const throw()
+{
+    return "the grade is too high.";
+}
 
 void    Form::throwException() const
 {
@@ -18,6 +27,7 @@ Form::Form(std::string const formName, int const gradeToSign, int const gradeToE
     }
     catch (std::exception & e)
     {
+        std::cerr << "Could not construct form "; 
         std::cerr << e.what() << "\n";
     }
     
@@ -59,45 +69,30 @@ int Form::getGradeToExecute() const
     return (_gradeToExecute);
 }
 
-bool Form::getFormState(bool printState) const
+bool Form::getFormState() const
 {
     if (_isSigned)
     {
-        if (printState)
-            std::cout << "signed";
         return (true);
     }
-    if (printState)
-        std::cout << "unsigned";
     return (false);
 
 }
 
 std::ostream &operator<<(std::ostream &o, Form const &i)
 {
-    o << "The forms name is : " << i.getName() << ".\n" << "Currently this form is " << i.getFormState(true) << ".\nThe required grade to sign it is : " << i.getGradeToSign() << ".\nThe required grade to execute is is : " << i.getGradeToExecute() << ".";
+    o << "The forms name is : " << i.getName() << ".\n" << "Currently this form is ";
+    if (i.getFormState()) 
+        o << "signed.\n";
+    else
+        o << "unsigned.\n";
+    o << "The required grade to sign is : " << i.getGradeToSign() << ".\nThe required grade to execute is : " << i.getGradeToExecute() << ".";
     return (o);
-}
-
-const char* Form::gradeTooLowException::what() const throw()
-{
-    return "the grade required to sign this form is superior than the grade of the bureaucrat";
-}
-const char* Form::gradeTooHighException::what() const throw()
-{
-    return "the grade required to sign this form is superior than the grade of the bureaucrat";
 }
 
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
-    try
-    {
-        if (_gradeToSign < bureaucrat.getGrade())
-            throw (gradeTooLowException());
-        _isSigned = true;
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    if (_gradeToSign < bureaucrat.getGrade())
+        return ;
+    _isSigned = true;
 }

@@ -100,7 +100,7 @@ void Bureaucrat::signForm(Form &frm)
     frm.beSigned(*this);
     try
     {
-        if (frm.getFormState(false))
+        if (frm.getFormState())
             std::cout << _name << " signed " << frm.getName() << std::endl;
         else
             throw Form::gradeTooLowException();

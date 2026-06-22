@@ -29,7 +29,7 @@ class Form
                 const char* what() const throw();
         };
         const std::string& getName() const;
-        bool getFormState(bool printState) const;
+        bool getFormState() const;
         void beSigned(const Bureaucrat &bureaucrat);
         int getGradeToSign() const;
         int getGradeToExecute() const;

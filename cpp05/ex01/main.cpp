@@ -13,7 +13,7 @@ int main(void)
     Form frm("Test form 1", 12, 15);
     std::cout << frm << std::endl;
 
-    std::cout << "<<< TEST 2 : INSTAITE A BUREAUCRAT WITH A GRADE INFERIOR TOO THE FORM GRADE AND TRY TO SIGN IT >>> \n";
+    std::cout << "<<< TEST 2 : INSTATIATE A BUREAUCRAT WITH A GRADE INFERIOR TOO THE FORM GRADE AND TRY TO SIGN IT >>> \n"; 
 
     Bureaucrat fancyBureaucrat("Fritz", 20);
     fancyBureaucrat.signForm(frm);
