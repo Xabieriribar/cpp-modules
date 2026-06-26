@@ -11,7 +11,7 @@ class AForm
     private:
         std::string const _formName;
         bool              _isSigned;
-        int const         _gradeToSin;
+        int const         _gradeToSign;
         int const         _gradeToExecute;
     public:
         AForm(std::string const formName, int const gradeToSign, int const gradeToExecute);
@@ -31,8 +31,8 @@ class AForm
         const std::string& getName() const;
         bool getAFormState() const;
         void beSigned(const Bureaucrat &bureaucrat);
-        int getGradeToSign() const;
-        int getGradeToExecute() const;
+        virtual int getGradeToSign() const = 0;
+        virtual int getGradeToExecute() const = 0;
         void    throwException() const;
         void execute(Bureaucrat const & executor);
 };

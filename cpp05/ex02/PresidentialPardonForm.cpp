@@ -22,7 +22,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm("Pre
     try
     {
         throwException();
-        std::ofstream outFile();
+        std::ofstream outFile(_target + "_shrubbery");
 
     }
     catch (std::exception & e)
@@ -95,4 +95,10 @@ void PresidentialPardonForm::beSigned(const Bureaucrat &bureaucrat)
     if (_gradeToSign < bureaucrat.getGrade())
         return ;
     _isSigned = true;
+}
+
+void PresidentialPardonForm::execute(Bureaucrat const & executor)
+{
+
+
 }
