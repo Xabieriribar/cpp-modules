@@ -95,4 +95,22 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
     if (_gradeToSign < bureaucrat.getGrade())
         return ;
     _isSigned = true;
+
+}
+
+void AForm::execute(Bureaucrat const & executor)        
+{
+    try
+    {
+        if (executor.getGrade() > _gradeToSign || executor.getGrade() > _gradeToExecute)
+            throw (gradeTooLowException)
+        action();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
+
+
 }

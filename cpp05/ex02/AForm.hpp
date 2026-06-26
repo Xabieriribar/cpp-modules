@@ -31,10 +31,11 @@ class AForm
         const std::string& getName() const;
         bool getAFormState() const;
         void beSigned(const Bureaucrat &bureaucrat);
-        virtual int getGradeToSign() const = 0;
-        virtual int getGradeToExecute() const = 0;
+        virtual int getGradeToSign() const;
+        virtual int getGradeToExecute() const;
         void    throwException() const;
-        void execute(Bureaucrat const & executor);
+        void execute(Bureaucrat const & executor);        
+        virtual void action() = 0;
 };
 
 std::ostream &operator<<(std::ostream &o, AForm const &i);
