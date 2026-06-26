@@ -1,9 +1,10 @@
 #ifndef PRESIDENTIALPARDONFORM_HPP
 #define PRESIDENTIALPARDONFORM_HPP
 
-#include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
+#include <fstream>
 
-class PresidentialPardonForm : public PresidentialPardonForm
+class PresidentialPardonForm : public AForm
 {
     private:
         std::string const _formName;
@@ -11,7 +12,7 @@ class PresidentialPardonForm : public PresidentialPardonForm
         int const         _gradeToSign;
         int const         _gradeToExecute;
     public:
-        PresidentialPardonForm(std::string const formName, int const gradeToSign, int const gradeToExecute);
+        PresidentialPardonForm(std::string _target);
         PresidentialPardonForm(PresidentialPardonForm const &other);
         PresidentialPardonForm& operator=(const PresidentialPardonForm &other);
         ~PresidentialPardonForm();

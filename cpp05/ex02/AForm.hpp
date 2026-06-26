@@ -1,6 +1,6 @@
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <iostream>
 
@@ -11,7 +11,7 @@ class AForm
     private:
         std::string const _formName;
         bool              _isSigned;
-        int const         _gradeToSign;
+        int const         _gradeToSin;
         int const         _gradeToExecute;
     public:
         AForm(std::string const formName, int const gradeToSign, int const gradeToExecute);
