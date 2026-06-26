@@ -16,7 +16,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
-void PresidentialPardonForm::action()
+void PresidentialPardonForm::action() const
 {
     std::ofstream outFile(_target + "_shrubbery");
 }

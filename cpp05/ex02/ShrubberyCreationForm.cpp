@@ -18,13 +18,16 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other)
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
     if (this != &other)
+    {
+        operator=(other);
         _isSigned = other._isSigned;
+    }
     return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-void    ShrubberyCreationForm::action()
+void    ShrubberyCreationForm::action() const
 {
     std::cout << _target << " target has been pardoned Zaphod Beeblebrox." << std::endl;
 }

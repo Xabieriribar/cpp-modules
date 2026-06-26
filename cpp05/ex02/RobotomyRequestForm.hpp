@@ -16,10 +16,7 @@ class RobotomyRequestForm : public AForm
         RobotomyRequestForm(RobotomyRequestForm const &other);
         RobotomyRequestForm& operator=(const RobotomyRequestForm &other);
         ~RobotomyRequestForm();
-        void action();
+        void action() const;
 };
 
-std::ostream &operator<<(std::ostream &o, RobotomyRequestForm const &i);
-
 #endif
-\

@@ -18,7 +18,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-void RobotomyRequestForm::action()
+void RobotomyRequestForm::action() const
 {
     int randomValue = rand() % 100 + 1;
     if (randomValue <= 50)
