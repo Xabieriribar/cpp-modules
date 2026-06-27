@@ -13,6 +13,11 @@ class Intern
         Intern(Intern const & other);
         Intern& operator=(Intern const & other);
         ~Intern();
+        class wrongFormNameException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
         AForm* makeForm(std::string _formName, std::string _target);
 }
 
