@@ -10,8 +10,8 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 {
     if (this != &other)
     {
-        operator=(other) 
-
+        AForm::operator=(other);
+        _target = other._target;
     }
     return (*this);
 }

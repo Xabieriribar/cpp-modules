@@ -120,6 +120,6 @@ void Bureaucrat::executeForm(AForm const & form) const
     }
     catch (std::exception & e)
     {
-        std::cerr << "Error while executing the form" << std::endl; 
+        std::cerr << "Error while executing the form: " << e.what() << std::endl; 
     }
 }

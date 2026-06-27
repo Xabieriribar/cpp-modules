@@ -20,7 +20,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     if (this != &other)
     {
         operator=(other);
-        _isSigned = other._isSigned;
+        _target = other._target;
     }
     return (*this);
 }

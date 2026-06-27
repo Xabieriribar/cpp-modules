@@ -15,6 +15,8 @@ class AForm
         int const         _gradeToExecute;
     public:
         AForm(std::string const formName, int const gradeToSign, int const gradeToExecute);
+        AForm(const AForm & other);
+        AForm& operator=(const AForm &other);
         ~AForm();
         class gradeTooLowException : public std::exception
         {
@@ -30,6 +32,11 @@ class AForm
         {
             public:
                 const char* what() const throw();
+        };
+        class gradeTooLowToExecute: public std::exception
+        {
+            public:
+                const char *what() const throw();
         };
         const std::string& getName() const;
         bool        getAFormState() const;

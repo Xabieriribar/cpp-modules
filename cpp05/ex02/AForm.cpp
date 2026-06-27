@@ -13,7 +13,12 @@ const char* AForm::gradeTooHighException::what() const throw()
 
 const char *AForm::formNotSignedException::what() const throw()
 {
-    return "you can't execute a form that isn't signed.";
+    return "form is not signed.";
+}
+
+const char *AForm::gradeTooLowToExecute::what() const throw()
+{
+    return "the grade is too low to execute the form.";
 }
 
 void    AForm::throwException() const
@@ -38,24 +43,24 @@ AForm::AForm(std::string const formName, int const gradeToSign, int const gradeT
     
 }
 
-// AForm::AForm(AForm const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
-// {
-//     try
-//     {
-//         throwException();
-//     }
-//     catch (std::exception & e)
-//     {
-//         std::cerr << e.what() << "\n";
-//     }
-// }
+AForm::AForm(const AForm & other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
+{
+    try
+    {
+        throwException();
+    }
+    catch (std::exception & e)
+    {
+        std::cerr << e.what() << "\n";
+    }
+}
 
-// AForm& AForm::operator=(const AForm &other)
-// {
-//     if (this != &other)
-//         _isSigned = other._isSigned;
-//     return (*this);
-// }
+AForm& AForm::operator=(const AForm &other)
+{
+    if (this != &other)
+        _isSigned = other._isSigned;
+    return (*this);
+}
 
 AForm::~AForm() {}
 
@@ -104,16 +109,9 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 
 void AForm::execute(Bureaucrat const & executor) const     
 {
-    try
-    {
-        if (getAFormState())
-            throw (formNotSignedException());
-        if (executor.getGrade() > _gradeToSign || executor.getGrade() > _gradeToExecute)
-            throw (gradeTooLowException());
-        action();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << "Error while executing the form: " <<  e.what() << '\n';
-    }
+    if (!getAFormState())
+        throw (formNotSignedException());
+    if (executor.getGrade() > _gradeToExecute)
+        throw(gradeTooLowToExecute());
+    action();
 }

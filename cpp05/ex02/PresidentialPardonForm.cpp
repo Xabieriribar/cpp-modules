@@ -1,7 +1,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(std::string Target) : AForm("PresidentialPardonForm", 145, 137), _target(Target) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string Target) : AForm("PresidentialPardonForm", 145, 137), _target(Target + "_shrubbery") {}
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &other) : AForm(other), _target(other._target) {}
 
@@ -9,6 +9,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
     if (this != &other)
     {
+        AForm::operator=(other);
         _target = other._target;
     }
     return (*this);
@@ -18,5 +19,5 @@ PresidentialPardonForm::~PresidentialPardonForm() {}
 
 void PresidentialPardonForm::action() const
 {
-    std::ofstream outFile(_target + "_shrubbery");
+    std::ofstream outFile(_target.c_str());
 }
