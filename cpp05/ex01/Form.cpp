@@ -27,7 +27,7 @@ Form::Form(std::string const formName, int const gradeToSign, int const gradeToE
     }
     catch (std::exception & e)
     {
-        std::cerr << "Could not construct form "; 
+        std::cerr << "Could not construct form: "; 
         std::cerr << e.what() << "\n";
     }
     
