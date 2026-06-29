@@ -2,10 +2,10 @@
 #define INTERN_HPP
 
 #include <iostream>
+#include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "PresidentialPardonForm.hpp"
-#include "AForm.hpp"
 
 class Bureaucrat;
 
@@ -14,7 +14,7 @@ class Intern
     private:
         AForm* presidentialPardonForm(const std::string& formTarget);
         AForm* robotomyRequestForm (const std::string& formTarget);
-        // AForm* shrubberyCreationForm(const std::string& formTarget);
+        AForm* shrubberyCreationForm(const std::string& formtarget);
         std::string _forms[3];
     public:
         Intern();

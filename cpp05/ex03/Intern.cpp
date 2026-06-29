@@ -50,12 +50,17 @@ AForm* Intern::robotomyRequestForm(const std::string& formTarget)
     return (robotomy);
 }
 
+AForm* Intern::shrubberyCreationForm(const std::string& formTarget)
+{
+    AForm* robotomy = new ShrubberyCreationForm(formTarget);
+    return (robotomy);
+}
 AForm* Intern::makeForm(std::string _formName, std::string _target)
 {
     AForm* (Intern::*pointer_array[3])(const std::string& formTarget);
     pointer_array[0] = &Intern::robotomyRequestForm;
-    // pointer_array[1] = &Intern::shrubberyCreationForm;
-    pointer_array[1] = &Intern::presidentialPardonForm;
+    pointer_array[1] = &Intern::ShrubberyCreationForm;
+    pointer_array[2] = &Intern::presidentialPardonForm;
     try
     {
         int i = 0;
