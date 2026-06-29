@@ -20,7 +20,9 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::action() const
 {
-    int randomValue = rand() % 100 + 1;
+    // int randomValue = rand() % 100 + 1;
+    int randomValue = rand();
+    std::cout << randomValue << std::endl;
     if (randomValue <= 50)
         std::cout << _target << "has been robotomized" << std::endl;
     else

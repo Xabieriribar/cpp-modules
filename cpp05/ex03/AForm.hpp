@@ -14,11 +14,10 @@ class AForm
         int const         _gradeToSign;
         int const         _gradeToExecute;
     public:
-        AForm();
         AForm(std::string const formName, int const gradeToSign, int const gradeToExecute);
         AForm(const AForm & other);
         AForm& operator=(const AForm &other);
-        ~AForm();
+        virtual ~AForm();
         class gradeTooLowException : public std::exception
         {
             public:

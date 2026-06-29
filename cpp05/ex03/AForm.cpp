@@ -29,7 +29,6 @@ void    AForm::throwException() const
             throw (gradeTooLowException());
 }
 
-AForm::AForm() {}
 AForm::AForm(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
     try
