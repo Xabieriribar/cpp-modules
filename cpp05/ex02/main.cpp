@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main(void)
 {
@@ -9,6 +11,7 @@ int main(void)
     //What can fail?
     //What are the boundaries?
     //How will I test it?
+    std::srand(std::time(NULL));
     std::cout << "<<< TEST 1 : MAKE A PRESIDENTIAL PARDON FORM EXECUTE>>> \n";
 
     PresidentialPardonForm presidentForm("home");
