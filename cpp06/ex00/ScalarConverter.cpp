@@ -84,8 +84,82 @@ void ScalarConverter::HandlePseudoLiterals(std::string input)
     }
 }
 
+void ScalarConverter::CharToFloat(char character)
+{
+    std::cout << "Float : " << static_cast<float>(character) << "f.0" << std::endl;
+}
+
+void ScalarConverter::CharToDouble(char character)
+{
+    std::cout << "Double : " << static_cast<double>(character) << ".0" << std::endl;
+}
+
+void ScalarConverter::CharToInt(char character)
+{
+    std::cout << "Int: " << static_cast<int>(character) << std::endl;
+}
+
+void ScalarConverter::HandleChars(char input)
+{
+    if (isprint(static_cast<unsigned char>(input)))
+    {
+        std::cout << "Char : '" << input << "'" << std::endl;
+        CharToInt(input);
+        CharToFloat(input);
+        CharToDouble(input);
+        return ;
+    }
+    else
+    {
+        printImpossible("Char");
+        CharToInt(input);
+        CharToFloat(input);
+        CharToDouble(input);
+        return ;
+    }
+}
+
+void ScalarConverter::IntToChar(int integer)
+{
+    if (isprint(integer))
+        std::cout << "Char : '" << static_cast<char>(integer) << "'" << std::endl;
+    else
+        printImpossible("Char");
+}
+
+void ScalarConverter::IntToFloat(int integer)
+{
+    std::cout << "Float : " << static_cast<float>(integer) << std::endl;
+}
+
+void ScalarConverter::IntToDouble(int integer)
+{
+    std::cout << "Double : " << static_cast<double>(integer) << std::endl;
+}
+
+void ScalarConverter::HandleNumbers(std::string input)
+{
+    if ((input.length() == 1 || input.length() == 2) && (isdigit(input[0]) && isdigit(input[1])))
+    {
+        int value = static_cast<int>(input);
+        IntToChar(value);
+        std::cout << "Int : " << value << std::endl;
+        IntToFloat(value);
+        IntToDouble(value);
+    }
+}
+
 void ScalarConverter::convert(std::string input)
 {
     if (input == "nanf" || input == "nan" || input == "inf" || input == "inff" || input == "-inf" || input == "-inff")
+    {
         HandlePseudoLiterals(input);
+        return ;
+    }
+    if (input.length() == 1 && !isdigit(input[0])) 
+    {
+        HandleChars(input[0]);
+        return ;
+    }
+    HandleNumbers(input);
 }
