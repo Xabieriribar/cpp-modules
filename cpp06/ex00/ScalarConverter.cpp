@@ -137,16 +137,53 @@ void ScalarConverter::IntToDouble(int integer)
     std::cout << "Double : " << static_cast<double>(integer) << std::endl;
 }
 
+bool ScalarConverter::IsNumber(std::string input)
+{
+    char *end;
+    char *end2;
+
+    const char *str = input.c_str();
+    strtol(str, &end, 10);
+    if (!*end)
+        return (true);
+    if (*end == '.' && *end + 1 != '\0')
+    {
+        strtol(end + 1, &end2, 10);
+        if (*end2 == 'f' && *end2 + 1 == '\0')
+            return (true);
+        if (*end2 && (*end2 == 'f' && *end2 + 1 != '\0'))
+            return (false);
+    }
+    return (true);
+}
+
+bool ScalarConverter::IsInt(std::string input)
+{
+    char *end;
+    strtol(input.c_str(), &end, 10);
+    if (*end)
+        return (false);
+    return (true);
+}
 void ScalarConverter::HandleNumbers(std::string input)
 {
-    if ((input.length() == 1 || input.length() == 2) && (isdigit(input[0]) && isdigit(input[1])))
+    if (IsInt(input))
     {
-        int value = static_cast<int>(input);
+        int value = strtol(input.c_str(), NULL, 10);
         IntToChar(value);
-        std::cout << "Int : " << value << std::endl;
+        std::cout << "Int : " << value << std::endl;;
         IntToFloat(value);
         IntToDouble(value);
+        return ;
     }
+    // if ((input.length() == 1 || input.length() == 2) && (isdigit(input[0]) && isdigit(input[1])))
+    // {
+    //     int value = static_cast<int>(input[0]);
+    //     IntToChar(value);
+    //     std::cout << "Int : " << value << std::endl;
+    //     IntToFloat(value);
+    //     IntToDouble(value);
+    // }
 }
 
 void ScalarConverter::convert(std::string input)
