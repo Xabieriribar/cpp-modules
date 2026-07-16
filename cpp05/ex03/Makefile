@@ -1,6 +1,6 @@
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 CXX = c++
-NAME = Forms
+NAME = Intern
 SRC = $(wildcard *.cpp)
 OBJECT = $(SRC:.cpp=.o)
 

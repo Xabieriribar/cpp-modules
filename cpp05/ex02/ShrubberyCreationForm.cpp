@@ -1,4 +1,5 @@
 #include "ShrubberyCreationForm.hpp"
+<<<<<<< HEAD
 
 const char* ShrubberyCreationForm::gradeTooLowException::what() const throw()
 {
@@ -33,6 +34,13 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string const formName, int con
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other) : _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
+=======
+#include "Bureaucrat.hpp"
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string Target) : AForm("ShrubberyCreationForm", 145, 137), _target(Target) {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other) : AForm(other)
+>>>>>>> f1e81bbb7c1301455035828b7bc3a53601f92ede
 {
     try
     {
@@ -47,12 +55,20 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other)
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
     if (this != &other)
+<<<<<<< HEAD
         _isSigned = other._isSigned;
+=======
+    {
+        operator=(other);
+        _target = other._target;
+    }
+>>>>>>> f1e81bbb7c1301455035828b7bc3a53601f92ede
     return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
+<<<<<<< HEAD
 const std::string& ShrubberyCreationForm::getName() const
 {
     return (_formName);
@@ -95,3 +111,9 @@ void ShrubberyCreationForm::beSigned(const Bureaucrat &bureaucrat)
         return ;
     _isSigned = true;
 }
+=======
+void    ShrubberyCreationForm::action() const
+{
+    std::cout << _target << " target has been pardoned Zaphod Beeblebrox." << std::endl;
+}
+>>>>>>> f1e81bbb7c1301455035828b7bc3a53601f92ede
