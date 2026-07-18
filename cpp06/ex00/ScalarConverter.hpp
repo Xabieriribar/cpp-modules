@@ -6,6 +6,8 @@
 #include <string>
 #include <cctype>
 #include <cstdlib>
+#include <iomanip>
+#include <cmath>
 #include <cerrno>
 #include <climits>
 #include <cstdio>
@@ -24,6 +26,8 @@ class ScalarConverter
         static void HandleChars(char input);
         static void HandleDoublePseudoLiterals(std::string input);
         static void HandleFloatPseudoLiterals(std::string input);
+        static void printDouble(std::string input);
+        static void printFloat(std::string input);
 
         static void DoubleToFloat(double nbr);
         static void CharToDouble(char character);
@@ -36,6 +40,7 @@ class ScalarConverter
         static void IntToDouble(int integer);
         static void PrintMax(long value);
         static void PrintNonDisplayable();
+        static void floatToChar(std::string input);
 
         static bool CheckPointSign(std::string input);
         static bool IsNumber(std::string input);

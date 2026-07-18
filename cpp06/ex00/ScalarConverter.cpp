@@ -171,6 +171,7 @@ bool ScalarConverter::IsNumber(std::string input)
 
 bool ScalarConverter::IsInt(std::string input)
 {
+    return (true);
     char *end;
     strtol(input.c_str(), &end, 10);
     if (*end)
@@ -186,9 +187,73 @@ void ScalarConverter::PrintMax(long value)
 }
 bool ScalarConverter::isFloat(std::string input)
 {
-    if (input.find('f'))
+    if (input.find('f') != std::string::npos)
         return (true);
     return (false);
+}
+// void ScalarConverter::floatToChar(std::string input)
+// {
+
+
+// }
+void ScalarConverter::printDouble(std::string input)
+{
+    long value = strtol(input.c_str(), NULL, 10);
+    double doubleValue = std::strtod(input.c_str(), NULL);
+    float floatValue = static_cast<float>(doubleValue);
+    IntToChar(value);
+    std::cout << "Int : " << value << std::endl;
+    std::cout.unsetf(std::ios::floatfield);
+    if (floatValue == std::floor(value))
+    {
+        std::cout << "Float : ";
+        std::cout <<
+        std::fixed <<
+        std::setprecision(1) << 
+        floatValue <<
+        "f" <<
+        std::endl;
+        std::cout << "Double : ";
+        std::cout <<
+        std::fixed <<
+        std::setprecision(1) << 
+        floatValue <<
+        std::endl;
+        return ;
+    }
+    std::cout << "Float : " << std::setprecision(std::numeric_limits<float>::digits10) << floatValue << "f" << std::endl;
+    std::cout << "Double : " << std::setprecision(std::numeric_limits<double>::digits10) << doubleValue << std::endl;
+
+}
+
+void ScalarConverter::printFloat(std::string input)
+{
+    long value = strtol(input.c_str(), NULL, 10);
+    double doubleValue = std::strtod(input.c_str(), NULL);
+    float floatValue = static_cast<float>(doubleValue);
+    IntToChar(value);
+    std::cout << "Int : " << value << std::endl;
+    std::cout.unsetf(std::ios::floatfield);
+    if (floatValue == std::floor(value))
+    {
+        std::cout << "Float : ";
+        std::cout <<
+        std::fixed <<
+        std::setprecision(1) << 
+        floatValue <<
+        "f" <<
+        std::endl;
+        std::cout << "Double : ";
+        std::cout <<
+        std::fixed <<
+        std::setprecision(1) << 
+        floatValue <<
+        std::endl;
+        return ;
+    }
+    std::cout << "Float : " << std::setprecision(std::numeric_limits<float>::digits10) << floatValue << "f" << std::endl;
+    std::cout << "Double : " << std::setprecision(std::numeric_limits<double>::digits10) << doubleValue << std::endl;
+
 }
 void ScalarConverter::HandleNumbers(std::string input)
 {
@@ -206,10 +271,26 @@ void ScalarConverter::HandleNumbers(std::string input)
         IntToDouble(value);
         return ;
     }
-    else if (IsNumber(input))
+    else
     {
-        if (isFloat(input))
+        printf("No");
+        return ; 
     }
+    if (!isFloat(input))
+    {
+        printDouble(input);
+    }
+    else
+    {
+        printFloat(input);
+    }
+    // else if (IsNumber(input))
+    // {
+    //     if (isFloat(input))
+    //     {
+    //         floatToChar(input);
+    //     }
+    // }
     // if ((input.length() == 1 || input.length() == 2) && (isdigit(input[0]) && isdigit(input[1])))
     // {
     //     int value = static_cast<int>(input[0]);
