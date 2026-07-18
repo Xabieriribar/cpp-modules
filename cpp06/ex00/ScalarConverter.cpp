@@ -91,7 +91,7 @@ void ScalarConverter::HandlePseudoLiterals(std::string input)
 
 void ScalarConverter::CharToFloat(char character)
 {
-    std::cout << "Float : " << static_cast<float>(character) << "f.0" << std::endl;
+    std::cout << "Float : " << static_cast<float>(character) << ".0f" << std::endl;
 }
 
 void ScalarConverter::CharToDouble(char character)
@@ -141,12 +141,12 @@ void ScalarConverter::IntToChar(int integer)
 
 void ScalarConverter::IntToFloat(int integer)
 {
-    std::cout << "Float : " << static_cast<float>(integer) << "f" << std::endl;
+    std::cout << "Float : " << static_cast<float>(integer) << ".0f" << std::endl;
 }
 
 void ScalarConverter::IntToDouble(int integer)
 {
-    std::cout << "Double : " << static_cast<double>(integer) << std::endl;
+    std::cout << "Double : " << static_cast<double>(integer) << ".0" << std::endl;
 }
 
 bool ScalarConverter::IsNumber(std::string input)
@@ -184,6 +184,12 @@ void ScalarConverter::PrintMax(long value)
     IntToFloat(value);
     IntToDouble(value);
 }
+bool ScalarConverter::isFloat(std::string input)
+{
+    if (input.find('f'))
+        return (true);
+    return (false);
+}
 void ScalarConverter::HandleNumbers(std::string input)
 {
     if (IsInt(input))
@@ -199,6 +205,10 @@ void ScalarConverter::HandleNumbers(std::string input)
         IntToFloat(value);
         IntToDouble(value);
         return ;
+    }
+    else if (IsNumber(input))
+    {
+        if (isFloat(input))
     }
     // if ((input.length() == 1 || input.length() == 2) && (isdigit(input[0]) && isdigit(input[1])))
     // {

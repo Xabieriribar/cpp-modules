@@ -41,6 +41,7 @@ class ScalarConverter
         static bool IsNumber(std::string input);
         static bool IsInt(std::string input);
         static bool IsBiggerThanMaxNumber(long value);
+        static bool isFloat(std::string input);
     public:
         static void convert(std::string input);
 };
