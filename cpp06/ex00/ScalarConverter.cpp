@@ -12,12 +12,12 @@ void ScalarConverter::PrintNonDisplayable()
 
 void ScalarConverter::DoubleToFloat(double nbr)
 {
-    std::cout << "float : " << static_cast<float>(nbr) << "f" << std::endl;
+    std::cout << "float : " << "+" << static_cast<float>(nbr) << "f" << std::endl;
 }
 
 void ScalarConverter::FloatToDouble(float nbr)
 {
-    std::cout << "double : " << static_cast<double>(nbr) << std::endl;
+    std::cout << "double : " << "+" << static_cast<double>(nbr) << std::endl;
 }
 
 void ScalarConverter::HandleFloatPseudoLiterals(std::string input)
@@ -28,7 +28,7 @@ void ScalarConverter::HandleFloatPseudoLiterals(std::string input)
     {
         value = std::numeric_limits<float>::quiet_NaN();
         std::cout << "float : " << value << "f" << std::endl;
-        FloatToDouble(value);
+        std::cout << "double : " << static_cast<double>(value) << std::endl;
         return ;
     }
     if (input == "+inff")
@@ -41,8 +41,8 @@ void ScalarConverter::HandleFloatPseudoLiterals(std::string input)
     if (input == "-inff")
     {
         value = -std::numeric_limits<float>::infinity();
-        std::cout << "float : " << "-" << value << "f" << std::endl;
-        FloatToDouble(value);
+        std::cout << "float : " << value << "f" << std::endl;
+        std::cout << "double : " << static_cast<double>(value) << std::endl;
         return ;
     }
 }
@@ -53,7 +53,7 @@ void ScalarConverter::HandleDoublePseudoLiterals(std::string input)
     if (input == "nan")
     {
         value = std::numeric_limits<double>::quiet_NaN();
-        DoubleToFloat(value);
+        std::cout << "float : " << static_cast<float>(value) << "f" << std::endl;
         std::cout << "double : " << value << std::endl;
         return ;
     }
@@ -61,13 +61,13 @@ void ScalarConverter::HandleDoublePseudoLiterals(std::string input)
     {
         value = std::numeric_limits<double>::infinity();
         DoubleToFloat(value);
-        std::cout << "double : " << value << std::endl;
+        std::cout << "double : " << "+" << value << std::endl;
         return ;
     }
     if (input == "-inf")
     {
         value = -std::numeric_limits<double>::infinity();
-        DoubleToFloat(value);
+        std::cout << "float : " << static_cast<float>(value) << "f" << std::endl;
         std::cout << "double : " << value << std::endl;
         return ;
     }
@@ -304,8 +304,57 @@ void ScalarConverter::HandleNumbers(std::string input)
     // }
 }
 
+bool ScalarConverter::isNotDigit(std::string input)
+{
+    int i = 0;
+    int sign_counter = 0;
+    int sign_index = 0;
+    int point_counter = 0;
+    int point_index = 0;
+    int float_index = 0;
+    int float_counter = 0;
+
+    while (input[i])
+    {
+        if (input[i] == '+' || input[i] == '-')
+        {
+            sign_counter++;
+            sign_index = i;
+        }
+        if (input[i] == '.')
+        {
+            point_counter++;
+            point_index = i;
+        }
+        if (input[i] == 'f')
+        {
+            float_counter++;
+            float_index = i;
+        }
+        i++;
+    }
+    if (point_counter == 0)
+        point_index++;
+    if (sign_counter == 2 || sign_index != 0 || point_counter == 2 || point_index == 0 || float_counter == 2)
+    {
+        return (true);
+    }
+    i = 0;
+    while (input[i])
+    {
+        if (!isdigit(input[i]) && input[i] != '+' && input[i] != '-' && input[i] != '.' && input[i] != 'f')
+        {
+            printf("what");
+            return (true);
+        }
+        i++;
+    }
+    return (false);
+}
 void ScalarConverter::convert(std::string input)
 {
+    if (input == "")
+        return ;
     if (input == "nanf" || input == "nan" || input == "+inf" || input == "+inff" || input == "-inf" || input == "-inff")
     {
         HandlePseudoLiterals(input);
@@ -314,6 +363,14 @@ void ScalarConverter::convert(std::string input)
     if (input.length() == 1 && !isdigit(input[0])) 
     {
         HandleChars(input[0]);
+        return ;
+    }
+    if (isNotDigit(input))
+    {
+        printImpossible("char");
+        printImpossible("int");
+        printImpossible("float");
+        printImpossible("double");
         return ;
     }
     HandleNumbers(input);
