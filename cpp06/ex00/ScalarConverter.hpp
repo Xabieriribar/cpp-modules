@@ -36,8 +36,8 @@ class ScalarConverter
         static void FloatToDouble(float nbr);
         static void HandleNumbers(std::string input);
         static void IntToChar(int integer);
-        static void IntToFloat(int integer);
-        static void IntToDouble(int integer);
+        static void IntToFloat(long integer);
+        static void IntToDouble(long integer);
         static void PrintMax(long value);
         static void PrintNonDisplayable();
         static void floatToChar(std::string input);

@@ -27,22 +27,22 @@ void ScalarConverter::HandleFloatPseudoLiterals(std::string input)
     if (input == "nanf")
     {
         value = std::numeric_limits<float>::quiet_NaN();
-        FloatToDouble(value);
         std::cout << "float : " << value << "f" << std::endl;
+        FloatToDouble(value);
         return ;
     }
-    if (input == "inff")
+    if (input == "+inff")
     {
         value = std::numeric_limits<float>::infinity();
+        std::cout << "float : " << "+" << value << "f" << std::endl;
         FloatToDouble(value);
-        std::cout << "float : " << value << "f" << std::endl;
         return ;
     }
     if (input == "-inff")
     {
         value = -std::numeric_limits<float>::infinity();
+        std::cout << "float : " << "-" << value << "f" << std::endl;
         FloatToDouble(value);
-        std::cout << "float : " << value << "f" << std::endl;
         return ;
     }
 }
@@ -57,7 +57,7 @@ void ScalarConverter::HandleDoublePseudoLiterals(std::string input)
         std::cout << "double : " << value << std::endl;
         return ;
     }
-    if (input == "inf")
+    if (input == "+inf")
     {
         value = std::numeric_limits<double>::infinity();
         DoubleToFloat(value);
@@ -77,12 +77,12 @@ void ScalarConverter::HandlePseudoLiterals(std::string input)
 {
     printImpossible("int");
     printImpossible("char");
-    if (input == "nan" || input == "inf" || input == "-inf")
+    if (input == "nan" || input == "+inf" || input == "-inf")
     {
         HandleDoublePseudoLiterals(input);
         return ;
     }
-    if (input == "nanf" || input == "inff" || input == "-inff")
+    if (input == "nanf" || input == "+inff" || input == "-inff")
     {
         HandleFloatPseudoLiterals(input);
         return ;
@@ -126,27 +126,35 @@ void ScalarConverter::HandleChars(char input)
 
 bool ScalarConverter::IsBiggerThanMaxNumber(long value)
 {
-    if (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max())
+    if (value >= INT_MIN && value <= INT_MAX)
         return (false);
     return (true);
 }
 void ScalarConverter::IntToChar(int integer)
 {
-    if (isprint(integer))
-        std::cout << "Char : '" << static_cast<char>(integer) << "'" << std::endl;
-    else
-        PrintNonDisplayable();
+    if (integer >= -129 && integer <= 127)
+    {
+        if (isprint(integer))
+            std::cout << "Char : '" << static_cast<char>(integer) << "'" << std::endl;
+        else
+            PrintNonDisplayable();
+        return ;
+    }
+    printImpossible("char");
+    
         
 }
 
-void ScalarConverter::IntToFloat(int integer)
+void ScalarConverter::IntToFloat(long integer)
 {
-    std::cout << "Float : " << static_cast<float>(integer) << ".0f" << std::endl;
+    float value = static_cast<float>(integer);
+    std::cout << "float : " << std::fixed << std::setprecision(1) << value << "f" << std::endl;
 }
 
-void ScalarConverter::IntToDouble(int integer)
+void ScalarConverter::IntToDouble(long integer)
 {
-    std::cout << "Double : " << static_cast<double>(integer) << ".0" << std::endl;
+    double value = static_cast<double>(integer);
+    std::cout << "double : " << std::fixed << std::setprecision(1) << value << std::endl;
 }
 
 bool ScalarConverter::IsNumber(std::string input)
@@ -171,7 +179,6 @@ bool ScalarConverter::IsNumber(std::string input)
 
 bool ScalarConverter::IsInt(std::string input)
 {
-    return (true);
     char *end;
     strtol(input.c_str(), &end, 10);
     if (*end)
@@ -271,14 +278,10 @@ void ScalarConverter::HandleNumbers(std::string input)
         IntToDouble(value);
         return ;
     }
-    else
-    {
-        printf("No");
-        return ; 
-    }
-    if (!isFloat(input))
+    else if (!isFloat(input))
     {
         printDouble(input);
+        return ;
     }
     else
     {
@@ -303,7 +306,7 @@ void ScalarConverter::HandleNumbers(std::string input)
 
 void ScalarConverter::convert(std::string input)
 {
-    if (input == "nanf" || input == "nan" || input == "inf" || input == "inff" || input == "-inf" || input == "-inff")
+    if (input == "nanf" || input == "nan" || input == "+inf" || input == "+inff" || input == "-inf" || input == "-inff")
     {
         HandlePseudoLiterals(input);
         return ;

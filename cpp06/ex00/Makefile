@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 
 CXX = c++
 NAME = ScalarConverter
 SRC = $(wildcard *.cpp)
@@ -20,4 +20,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all fclean clean re
+.PHONY : all fclean clean re 
