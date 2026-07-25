@@ -6,8 +6,7 @@
 class B : public Base
 {
     public:
-        virtual ~B();
-        void identify(Base* p);
+        ~B();
 };
 
 #endif
