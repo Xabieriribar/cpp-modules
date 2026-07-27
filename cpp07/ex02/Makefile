@@ -1,6 +1,6 @@
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 
 CXX = c++
-NAME = iter
+NAME = array
 SRC = $(wildcard *.cpp)
 OBJECT = $(SRC:.cpp=.o)
 
