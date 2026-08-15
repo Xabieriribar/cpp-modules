@@ -18,8 +18,8 @@ class Span
         ~Span();
 
         void addNumber(int nbr);
-        void shortestSpan(int nbr);
-        void longestSpan(int nbr);
+        unsigned int shortestSpan();
+        unsigned int longestSpan();
 };
 
 #endif
