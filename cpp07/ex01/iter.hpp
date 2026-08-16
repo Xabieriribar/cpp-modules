@@ -1,22 +1,29 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
-#include <iostream>
+#include <cstddef>
 
-template <typename T>
-void increase(T& array)
+template <typename T, typename F>
+void iter(T *array, std::size_t length, F function)
 {
-    ++array;
-}
+    std::size_t i = 0;
 
-template <typename T>
-void iter(T address[], int length, void (*increase)(T& array))
-{
-    int i = 0;
     while (i < length)
     {
-        increase(address[i]);
-        i++;
+        function(array[i]);
+        ++i;
+    }
+}
+
+template <typename T, typename F>
+void iter(const T *array, std::size_t length, F function)
+{
+    std::size_t i = 0;
+
+    while (i < length)
+    {
+        function(array[i]);
+        ++i;
     }
 }
 

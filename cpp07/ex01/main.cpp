@@ -1,16 +1,27 @@
 #include "iter.hpp"
+#include <iostream>
+#include <string>
 
-int main(void)
+template <typename T>
+void print(const T &value)
 {
-    int array[] = {10, 20, 30};
+    std::cout << value << std::endl;
+}
 
-    iter(array, 3, increase<int>);
+template <typename T>
+void increment(T &value)
+{
+    ++value;
+}
 
-    int i = 0;
-    while (i < 3)
-    {
-        std::cout << array[i] << std::endl;
-        i++;
-    }
-    return (0);
+int main()
+{
+    int numbers[] = {1, 2, 3, 4};
+    const std::string words[] = {"templates", "are", "useful"};
+
+    ::iter(numbers, 4, increment<int>);
+    ::iter(numbers, 4, print<int>);
+    ::iter(words, 3, print<std::string>);
+
+    return 0;
 }

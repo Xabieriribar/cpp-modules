@@ -1,12 +1,12 @@
 #ifndef DATA_HPP
 #define DATA_HPP
 
-#include <unistd.h>
-#include <iostream>
+#include <string>
 
 struct Data
 {
-    int numbers;
-    std::string names; 
+    int         number;
+    std::string text;
 };
+
 #endif

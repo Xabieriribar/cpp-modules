@@ -2,60 +2,97 @@
 #define ARRAY_HPP
 
 #include <exception>
-#include <cstdlib>
-#include <iostream>
-#include <string>
+#include <stdexcept>
+#include <cstddef>
 
 template <typename T>
 class Array
 {
-    private:
-        unsigned int _length;
-        T *_array;
-    public:
-        Array() : _length(0), _array(new T[_length]) {}
-        Array(unsigned int n) : _length(n), _array(new T[_length]) {}
-        Array(Array const& other) : _length(other._length), _array(new T[_length]) 
+private:
+    unsigned int _size;
+    T *_data;
+
+public:
+    Array() : _size(0), _data(NULL)
+    {
+    }
+
+    explicit Array(unsigned int n) : _size(n), _data(NULL)
+    {
+        if (_size != 0)
+            _data = new T[_size]();
+    }
+
+    Array(const Array &other) : _size(other._size), _data(NULL)
+    {
+        if (_size != 0)
         {
-            unsigned int i = 0;
-            while (i < _length)
+            _data = new T[_size]();
+            try
             {
-                _array[i] = other._array[i];
-                i++;
+                for (unsigned int i = 0; i < _size; ++i)
+                    _data[i] = other._data[i];
+            }
+            catch (...)
+            {
+                delete [] _data;
+                _data = NULL;
+                _size = 0;
+                throw;
             }
         }
-        Array& operator=(Array const& other)
+    }
+
+    Array &operator=(const Array &other)
+    {
+        if (this != &other)
         {
-            if (this != &other)
+            T *newData = NULL;
+
+            if (other._size != 0)
             {
-                _length = other._length;
-                unsigned int i = 0;
-                while (i < _length)
+                newData = new T[other._size]();
+                try
                 {
-                    _array[i] = other._array[i];
-                    i++;
+                    for (unsigned int i = 0; i < other._size; ++i)
+                        newData[i] = other._data[i];
+                }
+                catch (...)
+                {
+                    delete [] newData;
+                    throw;
                 }
             }
-            return (*this);
+            delete [] _data;
+            _data = newData;
+            _size = other._size;
         }
-        ~Array()
-        {
-            delete [] _array;
-        }
-        // T& operator=(const T& value)
-        // {
-        //     *this = value;
-        //     return (*this);
-        // }
-        T& operator[](unsigned int index)
-        {
-            if (index >= 0 && index < _length)
-                return (_array[index]);
-            throw (std::exception());
-        }
-        unsigned int size()
-        {
-            return (_length);
-        }
+        return *this;
+    }
+
+    ~Array()
+    {
+        delete [] _data;
+    }
+
+    T &operator[](unsigned int index)
+    {
+        if (index >= _size)
+            throw std::out_of_range("Array index out of bounds");
+        return _data[index];
+    }
+
+    const T &operator[](unsigned int index) const
+    {
+        if (index >= _size)
+            throw std::out_of_range("Array index out of bounds");
+        return _data[index];
+    }
+
+    unsigned int size() const
+    {
+        return _size;
+    }
 };
+
 #endif

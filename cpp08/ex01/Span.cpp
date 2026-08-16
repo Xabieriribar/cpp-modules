@@ -1,70 +1,70 @@
 #include "Span.hpp"
 
-Span::Span(unsigned int N) : _n(N) {}
+Span::Span() : _capacity(0) {}
 
-Span::Span(const Span& other) : _n(other._n), numbers(other.numbers) {}
+Span::Span(unsigned int n) : _capacity(n) {}
 
-Span& Span::operator=(const Span& other)
+Span::Span(const Span &other)
+    : _capacity(other._capacity), _numbers(other._numbers) {}
+
+Span &Span::operator=(const Span &other)
 {
     if (this != &other)
     {
-        _n = other._n;
-        numbers = other.numbers;
+        _capacity = other._capacity;
+        _numbers = other._numbers;
     }
-    return (*this);
+    return *this;
 }
 
 Span::~Span() {}
 
-void Span::addNumber(int nbr)
+void Span::addNumber(int number)
 {
-    if (numbers.size() >= _n)
-        throw std::runtime_error("Maximum amount of numbers allowed reached");
-    numbers.push_back(nbr);
+    if (_numbers.size() >= _capacity)
+        throw std::runtime_error("Span capacity exceeded");
+    _numbers.push_back(number);
 }
 
-unsigned int Span::shortestSpan()
+unsigned int Span::shortestSpan() const
 {
-    if (!numbers.size() || numbers.size() == 1)
-        throw std::runtime_error("There aren't enough numbers on this container");
+    if (_numbers.size() < 2)
+        throw std::runtime_error("Not enough numbers to compute a span");
 
-    std::vector<unsigned int> copy_numbers = numbers;
+    std::vector<int> sorted(_numbers);
+    std::sort(sorted.begin(), sorted.end());
 
-    std::sort(copy_numbers.begin(), copy_numbers.end());
+    unsigned int shortest = static_cast<unsigned int>(
+        static_cast<double>(sorted[1]) - static_cast<double>(sorted[0]));
 
-    std::vector<unsigned int>::iterator it = copy_numbers.begin();
-
-    unsigned int temp_distance = *(it + 1) - *it;
-    while (it != copy_numbers.end())
+    for (std::size_t i = 1; i + 1 < sorted.size(); ++i)
     {
-        if (temp_distance > (*(it + 1) - *it))
-            temp_distance = *(it + 1) - *it;
-        ++it;
+        unsigned int current = static_cast<unsigned int>(
+            static_cast<double>(sorted[i + 1]) - static_cast<double>(sorted[i]));
+        if (current < shortest)
+            shortest = current;
     }
-    return temp_distance;
+    return shortest;
 }
 
-unsigned int Span::longestSpan()
+unsigned int Span::longestSpan() const
 {
-    if (!numbers.size() || numbers.size() == 1)
-        throw std::runtime_error("There are no numbers on this vector container");
+    if (_numbers.size() < 2)
+        throw std::runtime_error("Not enough numbers to compute a span");
 
-    std::vector<unsigned int> copy_numbers = numbers;
+    int minimum = *std::min_element(_numbers.begin(), _numbers.end());
+    int maximum = *std::max_element(_numbers.begin(), _numbers.end());
 
-    std::sort(copy_numbers.begin(), copy_numbers.end());
+    return static_cast<unsigned int>(
+        static_cast<double>(maximum) - static_cast<double>(minimum));
+}
 
-    std::vector<unsigned int>::iterator it = copy_numbers.begin();
+unsigned int Span::size() const
+{
+    return static_cast<unsigned int>(_numbers.size());
+}
 
-    unsigned int max = *it;
-    unsigned int min = *it;
-    while (it != copy_numbers.end())
-    {
-        if ((it + 1) != copy_numbers.end() && max < *(it + 1))
-            max = *(it + 1);
-        if ((it + 1) != copy_numbers.end() && min > *(it + 1))
-            min = *(it + 1);
-        ++it;
-    }
-    unsigned int shortestSpan = max - min;
-    return (shortestSpan);
+unsigned int Span::capacity() const
+{
+    return _capacity;
 }

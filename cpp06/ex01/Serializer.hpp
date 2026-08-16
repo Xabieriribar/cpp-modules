@@ -3,18 +3,18 @@
 
 #include "Data.hpp"
 #include <stdint.h>
-#include <stdio.h>
 
 class Serializer
 {
     private:
         Serializer();
-        Serializer(Serializer & other);
-        Serializer& operator=(Serializer & Other);
+        Serializer(const Serializer &other);
+        Serializer &operator=(const Serializer &other);
         ~Serializer();
+
     public:
         static uintptr_t serialize(Data *ptr);
-        static Data* deserialize(uintptr_t raw);
-
+        static Data *deserialize(uintptr_t raw);
 };
+
 #endif

@@ -1,20 +1,22 @@
 #include "Serializer.hpp"
-#include "Data.hpp"
-#include <stdlib.h>
 
-int main(void)
+#include <iostream>
+
+int main()
 {
-    Data* object = new(Data);
-    uintptr_t serialized_object;
+    Data original;
+    original.number = 42;
+    original.text = "CPP06";
 
-    object->names = "Xabi";
-    object->numbers = 10;
-    serialized_object = Serializer::serialize(object);
-    Data *deserialized_object = Serializer::deserialize(serialized_object);
-    if (deserialized_object == object)
-    {
-        std::cout << "Transformation succeeded\n";
-        return (0);
-    }
-    return (0);
+    uintptr_t raw = Serializer::serialize(&original);
+    Data *restored = Serializer::deserialize(raw);
+
+    std::cout << "original pointer:     " << &original << std::endl;
+    std::cout << "deserialized pointer: " << restored << std::endl;
+    std::cout << "same pointer:         "
+              << (restored == &original ? "yes" : "no") << std::endl;
+    std::cout << "data: " << restored->number << ", " << restored->text
+              << std::endl;
+
+    return (restored == &original ? 0 : 1);
 }

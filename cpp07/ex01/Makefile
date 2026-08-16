@@ -1,23 +1,23 @@
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 
-CXX = c++
 NAME = iter
-SRC = $(wildcard *.cpp)
-OBJECT = $(SRC:.cpp=.o)
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = main.cpp
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECT)
-	$(CXX) $(CXXFLAGS) $(OBJECT) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-%.o:%.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECT)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY : all fclean clean re 
+.PHONY: all clean fclean re
