@@ -1,4 +1,3 @@
-
 #ifndef FORM_HPP
 #define FORM_HPP
 
@@ -18,12 +17,12 @@ class Form
         Form(Form const &other);
         Form& operator=(const Form &other);
         ~Form();
-        class gradeTooLowException : public std::exception
+        class GradeTooLowException : public std::exception
         {
             public:
                 const char* what() const throw();
         };
-        class gradeTooHighException : public std::exception
+        class GradeTooHighException : public std::exception
         {
             public:
                 const char* what() const throw();

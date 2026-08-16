@@ -15,12 +15,12 @@ class Bureaucrat
         Bureaucrat(Bureaucrat const &other);
         Bureaucrat& operator=(const Bureaucrat &other);
         ~Bureaucrat();
-        class gradeTooLowException : public std::exception
+        class GradeTooLowException : public std::exception
         {
             public:
                 const char* what() const throw();
         };
-        class gradeTooHighException : public std::exception
+        class GradeTooHighException : public std::exception
         {
             public:
                 const char* what() const throw();

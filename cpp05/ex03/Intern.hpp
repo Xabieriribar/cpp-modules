@@ -1,30 +1,18 @@
 #ifndef INTERN_HPP
 #define INTERN_HPP
-
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "PresidentialPardonForm.hpp"
-
-class Bureaucrat;
-
-class Intern  
+#include "AForm.hpp"
+#include <string>
+class Intern
 {
-    private:
-        AForm* presidentialPardonForm(const std::string& formTarget);
-        AForm* robotomyRequestForm (const std::string& formTarget);
-        AForm* shrubberyCreationForm(const std::string& formtarget);
-        std::string _forms[3];
-    public:
-        Intern();
-        Intern(Intern const & other);
-        Intern& operator=(Intern const & other);
-        ~Intern();
-        class wrongFormNameException : public std::exception
-        {
-            public:
-                const char* what() const throw();
-        };
-        AForm* makeForm(std::string _formName, std::string _target);
+private:
+    AForm *createShrubbery(const std::string &target) const;
+    AForm *createRobotomy(const std::string &target) const;
+    AForm *createPresidential(const std::string &target) const;
+public:
+    Intern();
+    Intern(const Intern &other);
+    Intern &operator=(const Intern &other);
+    ~Intern();
+    AForm *makeForm(const std::string &formName, const std::string &target) const;
 };
-
 #endif

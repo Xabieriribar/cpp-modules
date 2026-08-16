@@ -1,23 +1,16 @@
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+NAME = forms
 CXX = c++
-NAME = Forms
-SRC = $(wildcard *.cpp)
-OBJECT = $(SRC:.cpp=.o)
-
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
-
-$(NAME): $(OBJECT)
-	$(CXX) $(CXXFLAGS) $(OBJECT) -o $(NAME)
-
-%.o:%.cpp
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
 clean:
-	rm -f $(OBJECT)
-
+	rm -f $(OBJS)
 fclean: clean
 	rm -f $(NAME)
-
 re: fclean all
-
-.PHONY : all fclean clean re
+.PHONY: all clean fclean re

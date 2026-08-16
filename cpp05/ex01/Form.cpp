@@ -1,12 +1,12 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-const char* Form::gradeTooLowException::what() const throw()
+const char* Form::GradeTooLowException::what() const throw()
 {
     return "the grade is too low.";
 }
 
-const char* Form::gradeTooHighException::what() const throw()
+const char* Form::GradeTooHighException::what() const throw()
 {
     return "the grade is too high.";
 }
@@ -14,9 +14,9 @@ const char* Form::gradeTooHighException::what() const throw()
 void    Form::throwException() const
 {
         if (_gradeToExecute < 1 || _gradeToSign < 1)
-            throw (gradeTooHighException());
+            throw (GradeTooHighException());
         else if (_gradeToExecute > 150 || _gradeToSign > 150)
-            throw (gradeTooLowException());
+            throw (GradeTooLowException());
 }
 
 Form::Form(std::string const formName, int const gradeToSign, int const gradeToExecute) : _formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
@@ -93,6 +93,6 @@ std::ostream &operator<<(std::ostream &o, Form const &i)
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
     if (_gradeToSign < bureaucrat.getGrade())
-        return ;
+        throw Form::GradeTooLowException();
     _isSigned = true;
 }

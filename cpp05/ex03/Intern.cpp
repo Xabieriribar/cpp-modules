@@ -1,78 +1,28 @@
 #include "Intern.hpp"
-
-Intern::Intern() 
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include <iostream>
+Intern::Intern() {}
+Intern::Intern(const Intern &other) { (void)other; }
+Intern &Intern::operator=(const Intern &other) { (void)other; return *this; }
+Intern::~Intern() {}
+AForm *Intern::createShrubbery(const std::string &target) const { return new ShrubberyCreationForm(target); }
+AForm *Intern::createRobotomy(const std::string &target) const { return new RobotomyRequestForm(target); }
+AForm *Intern::createPresidential(const std::string &target) const { return new PresidentialPardonForm(target); }
+AForm *Intern::makeForm(const std::string &formName, const std::string &target) const
 {
-    _forms[0] = "robotomy request";
-    _forms[1] = "shrubbery creation";
-    _forms[2] = "presidential pardon";
-}
-
-Intern::Intern(Intern const & other)
-{
-    int i = 0;
-    while (i < 3)
-    {
-        _forms[i] = other._forms[i];
-        i++;
-    }
-}
-
-Intern& Intern::operator=(Intern const & other)
-{
-    if (this != &other)
-    {
-        int i = 0;
-        while (i < 3)
-        {
-            _forms[i] = other._forms[i];
-            i++;
+    const std::string names[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    AForm *(Intern::*creators[3])(const std::string &) const = {
+        &Intern::createShrubbery, &Intern::createRobotomy, &Intern::createPresidential
+    };
+    for (int i = 0; i < 3; ++i) {
+        if (formName == names[i]) {
+            AForm *form = (this->*creators[i])(target);
+            std::cout << "Intern creates " << formName << std::endl;
+            return form;
         }
     }
-    return (*this);
-
-}
-Intern::~Intern() {}
-
-
-const char* Intern::wrongFormNameException::what() const throw()
-{
-    return "The form's name is incorrect.";
-}
-
-AForm* Intern::presidentialPardonForm (const std::string& formTarget)
-{
-    AForm* president = new PresidentialPardonForm(formTarget);
-    return (president);
-}
-AForm* Intern::robotomyRequestForm(const std::string& formTarget)
-{
-    AForm* robotomy = new RobotomyRequestForm(formTarget);
-    return (robotomy);
-}
-
-AForm* Intern::shrubberyCreationForm(const std::string& formTarget)
-{
-    AForm* robotomy = new ShrubberyCreationForm(formTarget);
-    return (robotomy);
-}
-AForm* Intern::makeForm(std::string _formName, std::string _target)
-{
-    AForm* (Intern::*pointer_array[3])(const std::string& formTarget);
-    pointer_array[0] = &Intern::robotomyRequestForm;
-    pointer_array[1] = &Intern::shrubberyCreationForm;
-    pointer_array[2] = &Intern::presidentialPardonForm;
-    try
-    {
-        int i = 0;
-        while (i < 3 && _formName != _forms[i])
-            i++;
-        if (i > 2)
-            throw (wrongFormNameException());
-        return (this->*pointer_array[i])(_target);
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    return (NULL);
+    std::cerr << "Intern cannot create \"" << formName << "\": unknown form name." << std::endl;
+    return NULL;
 }

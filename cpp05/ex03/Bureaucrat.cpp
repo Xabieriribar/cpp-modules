@@ -1,125 +1,54 @@
 #include "Bureaucrat.hpp"
-
-void    Bureaucrat::throwException() const
+#include "AForm.hpp"
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {}
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
 {
-        if (_grade < 1)
-            throw (gradeTooHighException());
-        else if (_grade > 150)
-            throw (gradeTooLowException());
+    if (_grade < 1) throw GradeTooHighException();
+    if (_grade > 150) throw GradeTooLowException();
 }
-
-Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name), _grade(grade) 
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade) {}
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
-    try 
-    {
-        throwException();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    if (this != &other) _grade = other._grade;
+    return *this;
 }
-
-Bureaucrat::Bureaucrat(Bureaucrat const &other) : _name(other._name), _grade(other._grade) 
-{
-    try 
-    {
-        throwException();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-}
-
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
-{
-    if (this != &other)
-        _grade = other._grade;
-    return (*this);
-}
-
 Bureaucrat::~Bureaucrat() {}
-
+const std::string &Bureaucrat::getName() const { return _name; }
+int Bureaucrat::getGrade() const { return _grade; }
 void Bureaucrat::increment()
 {
-    try
-    {
-        if (_grade - 1 <= 0)
-            throw (gradeTooHighException());
-        _grade -= 1;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
+    if (_grade == 1) throw GradeTooHighException();
+    --_grade;
 }
-
 void Bureaucrat::decrement()
 {
-    try
-    {
-        if (_grade + 1 > 150)
-            throw (gradeTooLowException());
-        _grade += 1;
+    if (_grade == 150) throw GradeTooLowException();
+    ++_grade;
+}
+void Bureaucrat::signForm(AForm &form) const
+{
+    try {
+        form.beSigned(*this);
+        std::cout << _name << " signed " << form.getName() << std::endl;
+    } catch (const std::exception &e) {
+        std::cout << _name << " couldn't sign " << form.getName()
+                  << " because " << e.what() << std::endl;
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
 }
-
-const std::string& Bureaucrat::getName() const
+void Bureaucrat::executeForm(const AForm &form) const
 {
-    return (_name);
-}
-
-int Bureaucrat::getGrade() const
-{
-    return (_grade);
-}
-
-std::ostream &operator<<(std::ostream &o, Bureaucrat const &i)
-{
-    o << i.getName() << "," << " bureaucrat grade " << i.getGrade() << ".";
-    return (o);
-}
-
-const char* Bureaucrat::gradeTooLowException::what() const throw()
-{
-    return "Grade too low. The grade of a bureaucrat should be inferior or equal to 150.";
-}
-const char* Bureaucrat::gradeTooHighException::what() const throw()
-{
-    return "Grade too high. The grade of a bureaucrat should be superior to 0.";
-}
-
-void Bureaucrat::signAForm(AForm &frm)
-{
-    frm.beSigned(*this);
-    try
-    {
-        if (frm.getAFormState())
-            std::cout << _name << " signed " << frm.getName() << std::endl;
-        else
-            throw AForm::gradeTooLowException();
-    }
-    catch (std::exception & e)
-    {
-            std::cout << _name << " couldn't sign " << frm.getName() << " because " << e.what() << std::endl;
-    }
-
-}
-void Bureaucrat::executeForm(AForm const & form) const
-{
-    try
-    {
+    try {
         form.execute(*this);
-        std::cout << _name << " executed form " << form.getName() << std::endl;
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    } catch (const std::exception &e) {
+        std::cout << _name << " couldn't execute " << form.getName()
+                  << " because " << e.what() << std::endl;
     }
-    catch (std::exception & e)
-    {
-        std::cerr << "Error while executing the form: " << e.what() << std::endl; 
-    }
+}
+const char *Bureaucrat::GradeTooHighException::what() const throw() { return "grade is too high"; }
+const char *Bureaucrat::GradeTooLowException::what() const throw() { return "grade is too low"; }
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &b)
+{
+    out << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
+    return out;
 }
